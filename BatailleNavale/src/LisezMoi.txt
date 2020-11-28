@@ -1,0 +1,7 @@
+C'est la bataille navale en version console
+
+Lancer le menu pour jouer
+
+Il fonctionne très bien avec quand meme une ou deux erreurs. Si vous en trouvez, faites moi signe. Ex : evitez d'entrez une coordonnee déjà entrée et ne gère pas le fait qu'un bateau a été coulé mais la partie se termine lorsque tous les bâteaux ont été coulés.
+
+Vos remarques, polz@caramail.com
