@@ -6,7 +6,7 @@
 package Vue;
 
 /**
- *
+ * Bonjour
  * @author kanab
  */
 public class vue {
