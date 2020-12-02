@@ -90,6 +90,45 @@ public class Grille {
     
     public static void main(String[] args){
         System.out.println("bataillenavalenab.Grille.main()");
+         char[][] gr = new char[15][15];
+        for (int i = 0;i < gr.length+1; i++) {
+            if(i<9){
+                System.out.print(i + "  ");
+            }
+            else System.out.print(i + " ");
+        }
+        System.out.print("          ");
+        
+        for (int k = 0;k < gr.length+1; k++) {
+            if(k<9){
+                System.out.print(k + "  ");
+            }
+            else System.out.print(k + " ");
+        }
+        System.out.println();
+        
+        
+        for (int i = 0;i < gr.length; i++) {
+            if(i<9){
+                System.out.print(i+1 + "  ");
+            }
+            else System.out.print(i+1 + " ");
+            for (int j = 0;j < gr.length;j++) {
+               gr[i][j] = '~';
+               System.out.print(gr[i][j] + "  ");
+            }
+            System.out.print("         ");
+            
+            if(i<9){
+                System.out.print(i+1 + "  ");
+            }
+            else System.out.print(i+1 + " ");
+            for (int j = 0;j < gr.length;j++) {
+               gr[i][j] = '~';
+               System.out.print(gr[i][j] + "  ");
+            }
+            System.out.println();
+        }  
     }
     
 }
