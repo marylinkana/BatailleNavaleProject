@@ -36,6 +36,7 @@ public class Menu {
                         break;                
                     case 2: 
                         Grille grille = new Grille();
+                        System.out.println(grille.positionNavire().toString());
                         grille.initialiser();
                         break;
                     case 3:

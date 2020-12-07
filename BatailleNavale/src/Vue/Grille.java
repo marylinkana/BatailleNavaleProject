@@ -23,10 +23,11 @@ public class Grille {
     private ArrayList<Navire> navires = new ArrayList<Navire>();
     private char[][] tailleGrille = new char[15][15];
     
-    private Coordonnee positionNavire(){
+    public Coordonnee positionNavire(){
         Random random = new Random();
-        random.nextInt(15);
-        return new Coordonnee(random.nextInt(), random.nextInt());
+        int pos1 = (int)random.nextInt(15);
+        int pos2 = (int)random.nextInt(15);
+        return new Coordonnee(pos1, pos2);
     }
     
     private ArrayList<Navire> genererNavires(){
@@ -43,15 +44,15 @@ public class Grille {
     
     public void positionner(ArrayList<Navire> navires,int i,int j){
         for(int l = 0; l < navires.size(); l++){
-            if( i == navires.get(i).getPosition().getAbscisse() || j== navires.get(i).getPosition().getOrdonne()){
+            if( i == navires.get(i).getPosition().getAbscisse() && j == navires.get(i).getPosition().getOrdonne()){
                 if(navires.get(i) instanceof Croiseur){
-                    tailleGrille[i][j] = '*';
+                    tailleGrille[i][j] = '€';
                 }
                 if(navires.get(i) instanceof Cuirasse){
                     tailleGrille[i][j] = '#';
                 }
                 if(navires.get(i) instanceof Destroyer){
-                    tailleGrille[i][j] = '+';
+                    tailleGrille[i][j] = '£';
                 }
                 if(navires.get(i) instanceof Destroyer){
                     tailleGrille[i][j] = '@';
