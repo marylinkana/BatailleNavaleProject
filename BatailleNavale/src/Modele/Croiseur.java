@@ -11,8 +11,10 @@ package Modele;
  */
 public class Croiseur extends Navire {
 
-    public Croiseur(Coordonnee position) {
-        super("Croiseur", 5, 4, position);
+    public Croiseur(String sens, Coordonnee position) {
+        super("Croiseur", sens, 5, 4, position);
     }
+
+    
              
 }

@@ -9,12 +9,13 @@ package Modele;
  *
  * @author kanab
  */
-public class Cuirasse extends Navire {
+public class Tir {
+    public Coordonnee cible;
+    public int puissance;
 
-    public Cuirasse(String sens, Coordonnee position) {
-        super("Cuirasse", sens, 7, 9, position);
+    public Tir(Coordonnee cible, int puissance) {
+        this.cible = cible;
+        this.puissance = puissance;
     }
-
-    
-             
+       
 }

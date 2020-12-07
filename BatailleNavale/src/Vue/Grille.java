@@ -5,93 +5,74 @@
  */
 package Vue;
 
+import Modele.Navire;
+import Modele.Croiseur;
+import Modele.Cuirasse;
+import Modele.Destroyer;
+import Modele.SousMarin;
+import Modele.Coordonnee;
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author nabil
  */
 public class Grille {
     
-    private int hauteur;
-    private int largeur;
-    private int[][] cases;
-
-    public Grille() {
-
+    private ArrayList<Navire> navires = new ArrayList<Navire>();
+    private char[][] tailleGrille = new char[15][15];
+    
+    private Coordonnee positionNavire(){
+        Random random = new Random();
+        random.nextInt(15);
+        return new Coordonnee(random.nextInt(), random.nextInt());
     }
-  
-
-    /** 
-     * Ci-dessous une fonction qui permet d'évaluer la case correspondant aux 
-     * coordonnées j,k .
-     */
-    public int Case(Grille grille,int j,int k)
-    {
-        return cases[j][k];
+    
+    private ArrayList<Navire> genererNavires(){
+        Croiseur croiseur = new Croiseur("longeur", positionNavire());
+        Cuirasse cuirasse = new Cuirasse("longeur", positionNavire());
+        Destroyer destroyer = new Destroyer("longeur", positionNavire());
+        SousMarin sousMarin = new SousMarin("longeur", positionNavire());
+        this.navires.add(croiseur);
+        this.navires.add(cuirasse);
+        this.navires.add(destroyer);
+        this.navires.add(sousMarin);
+        return this.navires;
     }
-
-    /**
-     * Fonction permettant de changer la valeur d'une case
-     */
-
-    public void changerCase(Grille grille,int j,int k,int valeur)
-    {
-        cases[j][k] = valeur;
-    }
-
-    /** 
-     * Fonction gérant les symboles, le symbole * correspond à un débris
-     */
-
-    /**
-     * public char symbole(int x)
-    {
-        if(x == Mer || x == Navire)
-        {
-            return’~’;
-        }
-        else if(x == Touche)
-        {
-            return’X’;
+    
+    public void positionner(ArrayList<Navire> navires,int i,int j){
+        for(int l = 0; l < navires.size(); l++){
+            if( i == navires.get(i).getPosition().getAbscisse() || j== navires.get(i).getPosition().getOrdonne()){
+                if(navires.get(i) instanceof Croiseur){
+                    tailleGrille[i][j] = '*';
+                }
+                if(navires.get(i) instanceof Cuirasse){
+                    tailleGrille[i][j] = '#';
+                }
+                if(navires.get(i) instanceof Destroyer){
+                    tailleGrille[i][j] = '+';
+                }
+                if(navires.get(i) instanceof Destroyer){
+                    tailleGrille[i][j] = '@';
+                }
+            }
+            else {
+                tailleGrille[i][j] = '~';
+            }
         }
         
     }
-
-    /** 
-     * Fonction gérant l'affichage de la grille
-     */
-
-    public void afficherGrille(Grille grille)
-    {
-        for(int j=0; j<14; ++j)
-        {
-            for(int k=0; k<14; ++k)
-            {
-                System.out.print("~");
-            }
-            System.out.println();
-        }
-    }
+    
 
     /** 
      * Fonction initialisant une grille en début de partie
      * avec des ~~
      */
 
-    public void initialiserGrille(Grille grille)
-    {
-        for(int j=0; j<14; ++j)
-        {
-            for(int k=0; k<14; ++k)
-            {
-                Case(grille,j,k);
-            }
-        }
-    }
-    
-    public static void main(String[] args){
+    public void initialiser(){
         System.out.println("bataillenavalenab.Grille.main()");
-         char[][] gr = new char[15][15];
-        for (int i = 0;i < gr.length+1; i++) {
+        for (int i = 0;i < tailleGrille.length+1; i++) {
             if(i<9){
                 System.out.print(i + "  ");
             }
@@ -99,7 +80,7 @@ public class Grille {
         }
         System.out.print("          ");
         
-        for (int k = 0;k < gr.length+1; k++) {
+        for (int k = 0;k < tailleGrille.length+1; k++) {
             if(k<9){
                 System.out.print(k + "  ");
             }
@@ -108,14 +89,14 @@ public class Grille {
         System.out.println();
         
         
-        for (int i = 0;i < gr.length; i++) {
+        for (int i = 0;i < tailleGrille.length; i++) {
             if(i<9){
                 System.out.print(i+1 + "  ");
             }
             else System.out.print(i+1 + " ");
-            for (int j = 0;j < gr.length;j++) {
-               gr[i][j] = '~';
-               System.out.print(gr[i][j] + "  ");
+            for (int j = 0;j < tailleGrille.length;j++) {
+               positionner(genererNavires(), i, j);
+               System.out.print(tailleGrille[i][j] + "  ");
             }
             System.out.print("         ");
             
@@ -123,14 +104,14 @@ public class Grille {
                 System.out.print(i+1 + "  ");
             }
             else System.out.print(i+1 + " ");
-            for (int j = 0;j < gr.length;j++) {
-               gr[i][j] = '~';
-               System.out.print(gr[i][j] + "  ");
+            for (int j = 0;j < tailleGrille.length;j++) {
+               tailleGrille[i][j] = '~';
+               System.out.print(tailleGrille[i][j] + "  ");
             }
             System.out.println();
-        }  
+        } 
     }
-    
+
 }
 
 

@@ -11,12 +11,14 @@ package Modele;
  */
 public class Navire {
     public String type;
+    public String sens;
     public int taille;
     public int puissance;
     public Coordonnee position;
 
-    public Navire(String type, int taille, int puissance, Coordonnee position) {
+    public Navire(String type, String sens, int taille, int puissance, Coordonnee position) {
         this.type = type;
+        this.sens = sens;
         this.taille = taille;
         this.puissance = puissance;
         this.position = position;
@@ -30,6 +32,14 @@ public class Navire {
         this.type = type;
     }
 
+    public String getSens() {
+        return sens;
+    }
+
+    public void setSens(String sens) {
+        this.sens = sens;
+    }
+    
     public int getTaille() {
         return taille;
     }
@@ -56,22 +66,15 @@ public class Navire {
 
     @Override
     public String toString() {
-        return "Navire{" + "type=" + type + ", taille=" + taille + ", puissance=" + puissance + ", position=" + position + '}';
+        return "Navire{" + "type=" + type + ", sens=" + sens + ", taille=" + taille + ", puissance=" + puissance + ", position=" + position + '}';
     }
     
-    public int tirer(){
-        return this.getPuissance();
-    }
-    
-    public int subirTir(Navire tireur){
-        return tireur.getPuissance();
+    public Tir tirer(Coordonnee cible){
+        return new Tir(cible, this.getPuissance());
     }
     
     public Coordonnee seDeplacer(Coordonnee newPosition){
         return newPosition;
-    }
-    
-    
-    
+    }  
     
 }

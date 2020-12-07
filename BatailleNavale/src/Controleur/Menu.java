@@ -6,6 +6,8 @@
 package Controleur;
 
 import java.util.Scanner;
+import Vue.Grille;
+
 
 /**
  *
@@ -33,7 +35,8 @@ public class Menu {
                         System.out.println("jouer");
                         break;                
                     case 2: 
-                        System.out.println("charger");
+                        Grille grille = new Grille();
+                        grille.initialiser();
                         break;
                     case 3:
                         System.out.println("aide");
@@ -41,7 +44,7 @@ public class Menu {
 
                     default : System.out.println("Commande non autorisée");
                 }
-            }while (menu != 0);
+            }while (menu > 3);
         }
     
 }

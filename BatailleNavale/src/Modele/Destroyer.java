@@ -11,8 +11,10 @@ package Modele;
  */
 public class Destroyer extends Navire {
 
-    public Destroyer(Coordonnee position) {
-        super("Destroyer", 3, 1, position);
+    public Destroyer(String sens, Coordonnee position) {
+        super("Destroyer", sens, 3, 1, position);
     }
+
+    
              
 }
