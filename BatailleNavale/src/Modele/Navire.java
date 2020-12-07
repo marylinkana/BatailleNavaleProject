@@ -59,6 +59,18 @@ public class Navire {
         return "Navire{" + "type=" + type + ", taille=" + taille + ", puissance=" + puissance + ", position=" + position + '}';
     }
     
+    public int tirer(){
+        return this.getPuissance();
+    }
+    
+    public int subirTir(Navire tireur){
+        return tireur.getPuissance();
+    }
+    
+    public Coordonnee seDeplacer(Coordonnee newPosition){
+        return newPosition;
+    }
+    
     
     
     
