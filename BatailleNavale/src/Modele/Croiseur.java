@@ -9,6 +9,10 @@ package Modele;
  *
  * @author kanab
  */
-public class model {
-    
+public class Croiseur extends Navire {
+
+    public Croiseur(Coordonnee position) {
+        super("Croiseur", 5, 4, position);
+    }
+             
 }

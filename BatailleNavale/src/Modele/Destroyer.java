@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controleur;
+package Modele;
 
 /**
  *
  * @author kanab
  */
-public class Coordonnee {
-    
+public class Destroyer extends Navire {
+
+    public Destroyer(Coordonnee position) {
+        super("Destroyer", 3, 1, position);
+    }
+             
 }
