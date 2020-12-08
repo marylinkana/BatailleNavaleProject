@@ -21,20 +21,20 @@ import java.util.Random;
 public class Grille {
     
     private ArrayList<Navire> navires = new ArrayList<Navire>();
-    private char[][] tailleGrille = new char[15][15];
+    private char[][] grille = new char[15][15];
     
     public Coordonnee positionNavire(){
         Random random = new Random();
-        int pos1 = (int)random.nextInt(15);
-        int pos2 = (int)random.nextInt(15);
+        int pos1 = (int)random.nextInt(5);
+        int pos2 = (int)random.nextInt(5);
         return new Coordonnee(pos1, pos2);
     }
     
     private ArrayList<Navire> genererNavires(){
-        Croiseur croiseur = new Croiseur("longeur", positionNavire());
-        Cuirasse cuirasse = new Cuirasse("longeur", positionNavire());
-        Destroyer destroyer = new Destroyer("longeur", positionNavire());
-        SousMarin sousMarin = new SousMarin("longeur", positionNavire());
+        Croiseur croiseur = new Croiseur("longueur", new Coordonnee(1, 2));
+        Cuirasse cuirasse = new Cuirasse("longueur", new Coordonnee(2, 3));
+        Destroyer destroyer = new Destroyer("longueur", new Coordonnee(3, 4));
+        SousMarin sousMarin = new SousMarin("longueur", new Coordonnee(4, 5));
         this.navires.add(croiseur);
         this.navires.add(cuirasse);
         this.navires.add(destroyer);
@@ -43,24 +43,71 @@ public class Grille {
     }
     
     public void positionner(ArrayList<Navire> navires,int i,int j){
-        for(int l = 0; l < navires.size(); l++){
-            if( i == navires.get(i).getPosition().getAbscisse() && j == navires.get(i).getPosition().getOrdonne()){
-                if(navires.get(i) instanceof Croiseur){
-                    tailleGrille[i][j] = '€';
+        int x = navires.get(i).getPosition().getAbscisse()-1;
+        int y = navires.get(i).getPosition().getOrdonne()-1;
+        if(navires.get(i) instanceof Croiseur){
+            if(navires.get(i).sens == "longueur"){
+                if(i == x && (j >= y && j <= y+8)){
+                    grille[i][j] = '€';
                 }
-                if(navires.get(i) instanceof Cuirasse){
-                    tailleGrille[i][j] = '#';
-                }
-                if(navires.get(i) instanceof Destroyer){
-                    tailleGrille[i][j] = '£';
-                }
-                if(navires.get(i) instanceof Destroyer){
-                    tailleGrille[i][j] = '@';
+                else {
+                    grille[i][j] = '~';
                 }
             }
-            else {
-                tailleGrille[i][j] = '~';
+            else if(y == j && (i >= x || i <= x+8)){
+                    grille[i][j] = '€';
+                }
+                else {
+                    grille[i][j] = '~';
+                }
+        }
+        if(navires.get(i) instanceof Cuirasse){
+            if(navires.get(i).sens == "longueur"){
+                if(i == x && (j >= y && j <= y+6)){
+                        grille[i][j] = '#';
+                }
+                else {
+                    grille[i][j] = '~';
+                }
             }
+            else if(y == j && (i >= x || i <= x+6)){
+                    grille[i][j] = '#';
+                }
+                else {
+                    grille[i][j] = '~';
+                }
+        }
+        if(navires.get(i) instanceof Destroyer){
+            if(navires.get(i).sens == "longueur"){
+                if(i == x && (j >= y && j <= y+2)){
+                        grille[i][j] = '£';
+                }
+                else {
+                    grille[i][j] = '~';
+                }
+            }
+            else if(y == j && (i >= x || i <= x+2)){
+                    grille[i][j] = '£';
+                }
+                else {
+                    grille[i][j] = '~';
+                }
+        }
+        if(navires.get(i) instanceof SousMarin){
+            if(navires.get(i).sens == "longueur"){
+                if(i == x && j == y){
+                        grille[i][j] = '@';
+                }
+                else {
+                    grille[i][j] = '~';
+                }
+            }
+            else if(i == x && j == y){
+                    grille[i][j] = '@';
+                }
+                else {
+                    grille[i][j] = '~';
+                }
         }
         
     }
@@ -72,8 +119,7 @@ public class Grille {
      */
 
     public void initialiser(){
-        System.out.println("bataillenavalenab.Grille.main()");
-        for (int i = 0;i < tailleGrille.length+1; i++) {
+        for (int i = 0;i < grille.length+1; i++) {
             if(i<9){
                 System.out.print(i + "  ");
             }
@@ -81,7 +127,7 @@ public class Grille {
         }
         System.out.print("          ");
         
-        for (int k = 0;k < tailleGrille.length+1; k++) {
+        for (int k = 0;k < grille.length+1; k++) {
             if(k<9){
                 System.out.print(k + "  ");
             }
@@ -90,14 +136,14 @@ public class Grille {
         System.out.println();
         
         
-        for (int i = 0;i < tailleGrille.length; i++) {
+        for (int i = 0;i < grille.length; i++) {
             if(i<9){
                 System.out.print(i+1 + "  ");
             }
             else System.out.print(i+1 + " ");
-            for (int j = 0;j < tailleGrille.length;j++) {
+            for (int j = 0;j < grille.length;j++) {
                positionner(genererNavires(), i, j);
-               System.out.print(tailleGrille[i][j] + "  ");
+               System.out.print(grille[i][j] + "  ");
             }
             System.out.print("         ");
             
@@ -105,9 +151,9 @@ public class Grille {
                 System.out.print(i+1 + "  ");
             }
             else System.out.print(i+1 + " ");
-            for (int j = 0;j < tailleGrille.length;j++) {
-               tailleGrille[i][j] = '~';
-               System.out.print(tailleGrille[i][j] + "  ");
+            for (int j = 0;j < grille.length;j++) {
+               grille[i][j] = '~';
+               System.out.print(grille[i][j] + "  ");
             }
             System.out.println();
         } 
