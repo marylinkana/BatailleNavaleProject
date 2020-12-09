@@ -7,117 +7,114 @@ public class Fonction{
     /*
      * Permet de gérer le positionnement en longueur ou en largeur
      */
-     public int Coordonnee(int a) throws IOException{
-         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+    public int Coordonnee(int a) throws IOException{
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
 
-         boolean erreur ;
+        boolean erreur ;
 
-         do{
-             erreur = false ;
-             try{
-                 do{
-                     System.out.println("Le voulez-vous en :\n1. longeur\n2. hauteur") ;
-                     a = Integer.parseInt(in.readLine()) ;
-                 }while (a < 1 || a > 2) ;
-             }
-             catch (NumberFormatException e){
-                 System.out.println("Veuillez entrer un entier\n");
-                 erreur = true ;
-             }
-         }while(erreur != false) ;
+        do
+        {
+            erreur = false ;
+            try
+            {
+                do
+                {
+                    System.out.println("Le voulez-vous en :\n1. longeur\n2. hauteur") ;
+                    a = Integer.parseInt(in.readLine()) ;
+                }
+                while (a < 1 || a > 2) ;
+            }
+            catch (NumberFormatException e){
+                System.out.println("Veuillez entrer un entier\n");
+                erreur = true ;
+            }
+        }
+        while(erreur != false) ;
 
-         return a ;
-     }
+        return a ;
+    }
 
-     public int Ligne(int a) throws IOException // ligne de d�part
-     {
-             BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+    public int Ligne(int a) throws IOException // ligne de d�part
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
 
-             boolean erreur = false ;
+        boolean erreur = false ;
 
-             do
-             {
-                     erreur = false ;
+        do
+        {
+           erreur = false ;
 
-                     try
-                     {
-                             do
-                             {
-                                     System.out.println("\nEntrez la ligne de depart") ;
-                                     a = Integer.parseInt(in.readLine()) ;
-                             }
-                             while (a < 1 || a > 15) ;
-                     }
-                     catch (NumberFormatException e)
-                     {
-                             System.out.println("Veuillez entrer un entier entre 1 et 10\n");
-                             erreur = true ;
-                     }
-             }
-             while(erreur != false) ;
+            try
+            {
+                do
+                {
+                    System.out.println("\nEntrez la ligne de depart") ;
+                    a = Integer.parseInt(in.readLine()) ;
+                }
+                while (a < 1 || a > 15) ;
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Veuillez entrer un entier entre 1 et 10\n");
+                erreur = true ;
+            }
+        }
+        while(erreur != false) ;
 
-             return a ;
-     }
+       return a ;
+    }
 
-     public int Colonne(int a) throws IOException // colonne de d�part
-     {
-             BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+    public int Colonne(int a) throws IOException // colonne de d�part
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
 
-             boolean erreur = false ;
+        boolean erreur = false ;
 
-             do
-             {
-                     erreur = false ;
+        do
+        {
+            erreur = false ;
 
-                     try
-                     {
-                             do
-                             {
-                                     System.out.println("\nEntrez la colonne de depart") ;
-                                     a = Integer.parseInt(in.readLine()) ;
-                             }
-                             while (a < 1 || a > 15) ;
-                     }
-                     catch (NumberFormatException e)
-                     {
-                             System.out.println("Veuillez entrer un entier entre 1 et 10\n");
-                             erreur = true ;
-                     }
-             }
-             while(erreur != false) ;
+            try
+            {
+                do
+                {
+                    System.out.println("\nEntrez la colonne de depart") ;
+                    a = Integer.parseInt(in.readLine()) ;
+                }
+                while (a < 1 || a > 15) ;
+            }
+            catch (NumberFormatException e)
+            {
+                System.out.println("Veuillez entrer un entier entre 1 et 10\n");
+                erreur = true ;
+            }
+        }
+        while(erreur != false) ;
 
-             return a ;
-     }
+        return a ;
+    }
 
-     public void FirstPrint(String a [][]) // Affiche la grille quand vous placez les bateaux
-     {
-             for (int i = 0 ; i < 16 ; i++)
-             {
-                     for (int j = 0 ; j < 16 ; j++)
-                     {
-                             if (j == 0 && i == 0)
-                             {
-                                     System.out.print("   ") ;
-                             }
-                             else if(j == 0 && i == 15)
-                             {
-                                     System.out.print(a[i][j] + " ") ;
-                             }
-                             else if(j == 0 && i > 0)
-                             {
-                                     System.out.print(a[i][j] + "  ") ;
-                             }
-                             else
-                             {
-                                     System.out.print(a[i][j]) ;
-                             }
-                     }
-
-                     System.out.println() ;
-             }
-
-             System.out.println() ;
-     }
+    public void FirstPrint(String a [][]) // Affiche la grille quand vous placez les bateaux
+    {
+        for (int i = 0 ; i < 16 ; i++){
+            for (int j = 0 ; j < 16 ; j++){
+                if (j == 0 && i == 0){
+                    System.out.print("   ") ;
+                }
+                else if(j == 0 && i == 15){
+                    System.out.print(a[i][j] + " ") ;
+                }
+                else if(j == 0 && i > 0){
+                    System.out.print(a[i][j] + "  ") ;
+                }
+                else{
+                    System.out.print(a[i][j]) ;
+                }
+            }
+            System.out.println() ;
+        }
+        System.out.println() ;
+    }
 
 
      public void SecondPrint(String a [][], String b [][]) // Affiche les deux grilles, cotes � cotes
