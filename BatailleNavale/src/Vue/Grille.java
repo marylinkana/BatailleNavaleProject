@@ -31,10 +31,10 @@ public class Grille {
     }
     
     private ArrayList<Navire> genererNavires(){
-        Croiseur croiseur = new Croiseur("longueur", new Coordonnee(1, 2), true);
-        Cuirasse cuirasse = new Cuirasse("longueur", new Coordonnee(2, 3), true);
-        Destroyer destroyer = new Destroyer("longueur", new Coordonnee(3, 4), true);
-        SousMarin sousMarin = new SousMarin("longueur", new Coordonnee(4, 5), true);
+        Croiseur croiseur = new Croiseur(1, new Coordonnee(1, 2));
+        Cuirasse cuirasse = new Cuirasse(1, new Coordonnee(2, 3));
+        Destroyer destroyer = new Destroyer(1, new Coordonnee(3, 4));
+        SousMarin sousMarin = new SousMarin(1, new Coordonnee(4, 5));
         this.navires.add(croiseur);
         this.navires.add(cuirasse);
         this.navires.add(destroyer);
@@ -46,7 +46,7 @@ public class Grille {
         int x = navires.get(i).getPosition().getAbscisse()-1;
         int y = navires.get(i).getPosition().getOrdonne()-1;
         if(navires.get(i) instanceof Croiseur){
-            if(navires.get(i).sens == "longueur"){
+            if(navires.get(i).getSens() == 1){
                 if(i == x && (j >= y && j <= y+8)){
                     grille[i][j] = '€';
                 }
@@ -62,7 +62,7 @@ public class Grille {
                 }
         }
         if(navires.get(i) instanceof Cuirasse){
-            if(navires.get(i).sens == "longueur"){
+            if(navires.get(i).getSens() == 1){
                 if(i == x && (j >= y && j <= y+6)){
                         grille[i][j] = '#';
                 }
@@ -78,7 +78,7 @@ public class Grille {
                 }
         }
         if(navires.get(i) instanceof Destroyer){
-            if(navires.get(i).sens == "longueur"){
+            if(navires.get(i).getSens() == 1){
                 if(i == x && (j >= y && j <= y+2)){
                         grille[i][j] = '£';
                 }
@@ -94,7 +94,7 @@ public class Grille {
                 }
         }
         if(navires.get(i) instanceof SousMarin){
-            if(navires.get(i).sens == "longueur"){
+            if(navires.get(i).getSens() == 1){
                 if(i == x && j == y){
                         grille[i][j] = '@';
                 }

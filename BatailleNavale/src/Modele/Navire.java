@@ -10,22 +10,24 @@ package Modele;
  * @author kanab
  */
 public class Navire {
-    public String type;
-    public String symbole;
-    public int sens;
-    public int taille;
-    public int puissance;
-    public Coordonnee position;
+    private String type;
+    private String symbole;
+    private int sens;
+    private int taille;
+    private int puissance;
+    private Coordonnee position;
+    private boolean actif;
 
-    public Navire(String type, String symbole, int sens, int taille, int puissance, Coordonnee position) {
+    public Navire(String type, String symbole, int sens, int taille, int puissance, Coordonnee position, boolean actif) {
         this.type = type;
         this.symbole = symbole;
         this.sens = sens;
         this.taille = taille;
         this.puissance = puissance;
         this.position = position;
+        this.actif = actif;
     }
-   
+      
     public Navire(){}
 
     public String getType() {
@@ -44,8 +46,6 @@ public class Navire {
         this.symbole = symbole;
     }
     
-    
-
     public int getSens() {
         return sens;
     }
@@ -78,6 +78,14 @@ public class Navire {
         this.puissance = puissance;
     }
 
+    public boolean isActif() {
+        return actif;
+    }
+
+    public void setActif(boolean actif) {
+        this.actif = actif;
+    }
+    
     @Override
     public String toString() {
         return "Navire{" + "type=" + type + ", sens=" + sens + ", taille=" + taille + ", puissance=" + puissance + ", position=" + position + '}';
