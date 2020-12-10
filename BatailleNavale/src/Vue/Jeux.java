@@ -92,6 +92,10 @@ public class Jeux
                     if (grilleOrdi[ligneCiblee][colonneCiblee] == "~  ")
                     {
                         grilleCachee[ligneCiblee][colonneCiblee] = "   " ;	
+                    }
+                    else if (grilleOrdi[ligneCiblee][colonneCiblee] == "   ")
+                    {
+                        grilleCachee[ligneCiblee][colonneCiblee] = "   " ;	
                     }	
                     else
                     {
@@ -113,6 +117,11 @@ public class Jeux
 
 
                         if (grille[ligne][colonne] == "~  ")
+                        {
+                            grille[ligne][colonne] = "   " ;
+                            continuer = 0 ;	
+                        }
+                        else if (grille[ligne][colonne] == "   ")
                         {
                             grille[ligne][colonne] = "   " ;
                             continuer = 0 ;	
@@ -161,7 +170,7 @@ public class Jeux
                         switch (choix) 
                         {
                             case 1 :
-                                if (grille[ln-1][col] == "   " && grille[ln-1][col] == "~  ")
+                                if (grille[ln-1][col] == "~  ")
                                 {
                                     grille[ln-1][col] = "   " ;
                                     choix = choix + 1 ;
@@ -169,7 +178,7 @@ public class Jeux
                                     col = colonne ;	
                                     continuer = 1;								
                                 }
-                                else if(grille[ln-1][col] == "X  ")
+                                else if(grille[ln-1][col] == "   " || grille[ln-1][col] == "X  ")
                                 {
                                     ln = ln - 1 ;
                                     col = col ;		
@@ -185,7 +194,7 @@ public class Jeux
                                 break ;
 
                                 case 2 :
-                                    if (grille[ln][col-1] == "   " && grille[ln][col-1] == "~  ")
+                                    if (grille[ln][col-1] == "~  ")
                                     {
                                         grille[ln][col-1] = "   " ;
                                         choix = choix + 1 ;	
@@ -193,7 +202,7 @@ public class Jeux
                                         col = colonne ;	
                                         continuer = 1;						
                                     }
-                                    else if(grille[ln][col-1] == "X  ")
+                                    else if(grille[ln][col-1] == "   " || grille[ln][col-1] == "X  ")
                                     {
                                         ln = ln ;
                                         col = col - 1 ;		
@@ -209,7 +218,7 @@ public class Jeux
                                     break ;	
 
                                     case 3 :
-                                        if (grille[ln][col+1] == "   " && grille[ln][col+1] == "~  ")
+                                        if (grille[ln][col+1] == "~  ")
                                         {
                                             grille[ln][col+1] = "   " ;
                                             choix = choix + 1 ;	
@@ -217,7 +226,7 @@ public class Jeux
                                             col = colonne ;
                                             continuer = 1;									
                                         } 
-                                        else if(grille[ln][col+1] == "X  ")
+                                        else if(grille[ln][col+1] == "   " || grille[ln][col+1] == "X  ")
                                         {
                                             ln = ln ;
                                             col = col + 1 ;		
@@ -233,7 +242,7 @@ public class Jeux
                                     break ;	
 
                                     case 4 :
-                                    if (grille[ln+1][col] == "   " && grille[ln+1][col] == "~  ")
+                                    if (grille[ln+1][col] == "~  ")
                                     {
                                         grille[ln+1][col] = "   " ;
                                         choix = 0 ;
@@ -242,7 +251,7 @@ public class Jeux
                                         col = colonne ;	
                                         continuer = 0 ;								
                                     }
-                                    else if(grille[ln+1][col] == "X  ")
+                                    else if(grille[ln+1][col] == "   " || grille[ln+1][col] == "X  ")
                                     {
                                         ln = ln + 1;
                                         col = col ;		
@@ -261,9 +270,9 @@ public class Jeux
                     compteur = compteur + 1 ;
                 }
             }
-            while(touche != 17 && toucheA != 17) ;
+            while(touche != 5 && toucheA != 5) ;
 
-            if (toucheA == 17) 
+            if (toucheA == 5) 
             {
                 fonction.SecondPrint(grille, grilleCachee) ;
                 System.out.println(nomDuJoueur + " : WINNER") ;

@@ -394,7 +394,7 @@ public class Fonction{
          */
         for(int i=0; i<2; i++){
             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-            System.out.println("Placer votre Cuirassé N°" + i+1) ;
+            System.out.println("Placer vos Cuirassés\n") ;
             fonction.FirstPrint(grille) ;
             fonction.navireJoueur(grille, 7) ; 
         }
@@ -405,7 +405,7 @@ public class Fonction{
          */   
         for(int i=0; i<3; i++){
             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-            System.out.println("Placer votre Destroyer N°" + i+1) ;
+            System.out.println("Placer vos Destroyer\n") ;
             fonction.FirstPrint(grille) ;
             fonction.navireJoueur(grille, 3) ;  
         }
@@ -415,7 +415,7 @@ public class Fonction{
          */
         for(int i=0; i<4; i++){
             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-            System.out.println("Placer votre Destroyer N°" + i+1) ;
+            System.out.println("Placer vos SousMarins\n") ;
             fonction.FirstPrint(grille) ;
             fonction.navireJoueur(grille, 1) ;
         }
