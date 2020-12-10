@@ -12,7 +12,7 @@ package Modele;
 public class Cuirasse extends Navire {
 
     public Cuirasse(int sens, Coordonnee position) {
-        super("Cuirasse", "€", sens, 7, 9, position);
+        super("Cuirasse", "€  ", sens, 7, 9, position);
     }
 
     @Override

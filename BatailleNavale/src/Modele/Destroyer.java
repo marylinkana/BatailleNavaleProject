@@ -12,7 +12,7 @@ package Modele;
 public class Destroyer extends Navire {
 
     public Destroyer(int sens, Coordonnee position) {
-        super("Destroyer", "#", sens, 3, 1, position);
+        super("Destroyer", "#  ", sens, 3, 1, position);
     }
 
     @Override

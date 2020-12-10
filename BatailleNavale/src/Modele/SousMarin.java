@@ -12,7 +12,7 @@ package Modele;
 public class SousMarin extends Navire {
 
     public SousMarin(int sens, Coordonnee position) {
-        super("SousMarin", "@", sens, 1, 1, position);
+        super("SousMarin", "@  ", sens, 1, 1, position);
     }
 
     @Override

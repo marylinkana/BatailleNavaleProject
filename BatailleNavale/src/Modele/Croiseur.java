@@ -12,7 +12,7 @@ package Modele;
 public class Croiseur extends Navire {
 
     public Croiseur(int sens, Coordonnee position) {
-        super("Croiseur", "\04", sens, 5, 4, position);
+        super("Croiseur", "\04  ", sens, 5, 4, position);
     }
 
     @Override

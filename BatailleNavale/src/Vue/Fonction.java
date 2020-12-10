@@ -105,7 +105,7 @@ public class Fonction{
     /*
      * ORGANISE LES GRILLES
      */
-    public void FirstPrint(String a [][])
+    public void firstPrint(String a [][])
     {
         for (int i = 0 ; i < 16 ; i++){
             for (int j = 0 ; j < 16 ; j++){
@@ -130,7 +130,7 @@ public class Fonction{
     /*
      * Positionne les grilles cote à cote
      */
-    public void SecondPrint(String a [][], String b [][])
+    public void secondPrint(String a [][], String b [][])
     {
         for (int i = 0 ; i < 16 ; i++)
         {
@@ -219,7 +219,7 @@ public class Fonction{
 
                             for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + nbre) ; j++)
                             {
-                                if(grille[navire.getPosition().getAbscisse()][j] == "\04 ")
+                                if(grille[navire.getPosition().getAbscisse()][j] != "~  ")
                                 {
                                     erreur = 0 ;
                                     i = navire.getPosition().getOrdonne() + nbre ;
@@ -230,7 +230,7 @@ public class Fonction{
                             {
                                 for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + nbre) ; j++)
                                 {
-                                    grille[navire.getPosition().getAbscisse()][j] = navire.getSymbole()+"  " ;
+                                    grille[navire.getPosition().getAbscisse()][j] = navire.getSymbole();
                                 }
                                 i = navire.getPosition().getOrdonne() + nbre ;
                             }
@@ -254,7 +254,7 @@ public class Fonction{
 
                             for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + nbre) ; j++)
                             {
-                                if(grille[j][navire.getPosition().getOrdonne()] == "\04  ")
+                                if(grille[j][navire.getPosition().getOrdonne()] != "~  ")
                                 {
                                     erreur = 0 ;
                                     i = navire.getPosition().getAbscisse() + nbre ;
@@ -265,7 +265,7 @@ public class Fonction{
                             {
                                 for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + nbre) ; j++)
                                 {
-                                    grille[j][navire.getPosition().getOrdonne()] = navire.getSymbole()+"  " ;
+                                    grille[j][navire.getPosition().getOrdonne()] = navire.getSymbole() ;
                                 }
                                 i = navire.getPosition().getAbscisse() + nbre ;
                             }
@@ -285,21 +285,36 @@ public class Fonction{
     public void navireOrdi(String grille [][], int nbre)
     {
         int erreur = 0 ;
-
+        
+        Navire navire = new Navire();      
+        
         do
         {
            int i = 0 ;
-           int coordonnee = (int)(Math.random() * (2) + 1) ;
+           int sens = (int)(Math.random() * (2) + 1) ;
            int abscisse = (int)(Math.random() * (15) + 1) ;
            int ordonnee = (int)(Math.random() * (15) + 1) ;
+           
+           if(nbre == 9){
+            navire = new Croiseur(sens, new Coordonnee(abscisse, ordonnee));
+            }        
+            if(nbre == 7){
+                navire = new Cuirasse(sens, new Coordonnee(abscisse, ordonnee));
+            }        
+            if(nbre == 3){
+                navire = new Destroyer(sens, new Coordonnee(abscisse, ordonnee));
+            }        
+            if(nbre == 1){
+                navire = new SousMarin(sens, new Coordonnee(abscisse, ordonnee));
+            }
 
            erreur = 1 ;
 
-           switch (coordonnee)
+           switch (sens)
            {
                case 1 :
                {
-                   if((ordonnee + nbre) > 16)
+                   if((navire.getPosition().getOrdonne() + nbre) > 16)
                    {
                         erreur = 0 ;
                    }
@@ -307,35 +322,35 @@ public class Fonction{
                    {
                        do
                        {
-                           i = ordonnee ;
+                           i = navire.getPosition().getOrdonne() ;
 
-                           for (int j = ordonnee ; j < (ordonnee + nbre) ; j++)
+                           for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + nbre) ; j++)
                            {
-                               if(grille[abscisse][j] == "\04")
+                               if(grille[navire.getPosition().getAbscisse()][j] != "~  ")
                                {
                                    erreur = 0 ;
-                                   i = ordonnee + nbre ;
+                                   i = navire.getPosition().getOrdonne() + nbre ;
                                }
                            }
 
                            if (erreur != 0)
                            {
-                               for (int j = ordonnee ; j < (ordonnee + nbre) ; j++)
+                               for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + nbre) ; j++)
                                {
-                                   grille[abscisse][j] = "\04" ;
+                                   grille[navire.getPosition().getAbscisse()][j] = navire.getSymbole() ;
 
                                }
-                               i = ordonnee + nbre ;
+                               i = navire.getPosition().getOrdonne() + nbre ;
                            }
                        }
-                       while(i < ordonnee + nbre );
+                       while(i < navire.getPosition().getOrdonne() + nbre );
                    }
                }
                break ;
 
                case 2 :
                {
-                   if((abscisse + nbre) > 16)
+                   if((navire.getPosition().getAbscisse() + nbre) > 16)
                    {
                        erreur = 0 ;
                    }
@@ -343,11 +358,11 @@ public class Fonction{
                    {
                        do
                        {
-                           i = abscisse ;
+                           i = navire.getPosition().getAbscisse() ;
 
-                           for (int j = abscisse ; j < (abscisse + nbre) ; j++)
+                           for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + nbre) ; j++)
                            {
-                               if(grille[j][ordonnee] == "\04")
+                               if(grille[j][navire.getPosition().getOrdonne()] != "~  ")
                                {
                                    erreur = 0 ;
                                    i = abscisse + nbre ;
@@ -356,14 +371,14 @@ public class Fonction{
 
                            if (erreur != 0)
                            {
-                               for (int j = abscisse ; j < (abscisse + nbre) ; j++)
+                               for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + nbre) ; j++)
                                {
-                                   grille[j][ordonnee] = "\04" ;
+                                   grille[j][navire.getPosition().getOrdonne()] = navire.getSymbole() ;
                                }
-                               i = abscisse + nbre ;
+                               i = navire.getPosition().getAbscisse() + nbre ;
                            }
                        }
-                       while(i < abscisse + nbre );
+                       while(i < navire.getPosition().getAbscisse() + nbre );
                    }
                }
                break ;
@@ -386,7 +401,7 @@ public class Fonction{
          */	
         System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
         System.out.println("Placer votre Croiseur\n") ;
-        fonction.FirstPrint(grille) ;
+        fonction.firstPrint(grille) ;
         fonction.navireJoueur(grille, 9) ;
 
         /*
@@ -395,7 +410,7 @@ public class Fonction{
         for(int i=0; i<2; i++){
             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
             System.out.println("Placer vos Cuirassés\n") ;
-            fonction.FirstPrint(grille) ;
+            fonction.firstPrint(grille) ;
             fonction.navireJoueur(grille, 7) ; 
         }
         
@@ -406,7 +421,7 @@ public class Fonction{
         for(int i=0; i<3; i++){
             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
             System.out.println("Placer vos Destroyer\n") ;
-            fonction.FirstPrint(grille) ;
+            fonction.firstPrint(grille) ;
             fonction.navireJoueur(grille, 3) ;  
         }
         
@@ -416,37 +431,45 @@ public class Fonction{
         for(int i=0; i<4; i++){
             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
             System.out.println("Placer vos SousMarins\n") ;
-            fonction.FirstPrint(grille) ;
+            fonction.firstPrint(grille) ;
             fonction.navireJoueur(grille, 1) ;
         }
     }
 
-
+    /*
+     * Positionnement aléatoire des navire de l'ordinateur
+     */
     public void Ordi(String [][] grilleOrdi) throws IOException
     {
        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
 
-       Fonction fonction = new Fonction() ;
+       Fonction fonction = new Fonction();
 
        /*
         *Positionement du Croiseur � 9 cases
         */	
-       fonction.navireOrdi(grilleOrdi, 9) ;
+        fonction.navireOrdi(grilleOrdi, 9);
        
        /*
-        *Positionement du Croiseur � 7 cases
+        *Positionement des Cuirasse � 7 cases
         */
-       fonction.navireOrdi(grilleOrdi, 7) ;
+        for(int i = 0; i < 2; i++){
+            fonction.navireOrdi(grilleOrdi, 7);
+        }
        
        /*
-        *Positionement du Croiseur � 3 cases
+        *Positionement des Destroyer � 3 cases
         */ 
-       fonction.navireOrdi(grilleOrdi, 3) ;
+        for(int i = 0; i < 3; i++){
+            fonction.navireOrdi(grilleOrdi, 3);
+        }
        
        /*
-        *Positionement du Croiseur � 1 case
+        *Positionement des SousMarin � 1 case
         */
-       fonction.navireOrdi(grilleOrdi, 1) ;
+        for(int i = 0; i < 4; i++){
+            fonction.navireOrdi(grilleOrdi, 1) ;
+        }
     }
      
     public void Grille(int colonne, int ligne, String [][] grilleCachee) throws IOException
