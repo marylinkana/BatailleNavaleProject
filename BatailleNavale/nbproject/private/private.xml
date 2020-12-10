@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/nabil/Documents/GitHub/BatailleNavaleProject/BatailleNavaleProject/BatailleNavale/src/Modele/Tir.java</file>
-            <file>file:/C:/Users/nabil/Documents/GitHub/BatailleNavaleProject/BatailleNavaleProject/BatailleNavale/src/Modele/Coordonnee.java</file>
-            <file>file:/C:/Users/nabil/Documents/GitHub/BatailleNavaleProject/BatailleNavaleProject/BatailleNavale/src/Modele/Navire.java</file>
-            <file>file:/C:/Users/nabil/Documents/GitHub/BatailleNavaleProject/BatailleNavaleProject/BatailleNavale/src/Modele/Deplacer.java</file>
-            <file>file:/C:/Users/nabil/Documents/GitHub/BatailleNavaleProject/BatailleNavaleProject/BatailleNavale/src/Vue/Grille.java</file>
-            <file>file:/C:/Users/nabil/Documents/GitHub/BatailleNavaleProject/BatailleNavaleProject/BatailleNavale/src/Modele/Cuirasse.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Modele/SousMarin.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Modele/Deplacer.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Modele/Cuirasse.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Controleur/Menu.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Modele/Croiseur.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Vue/Jeux.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Vue/Grille.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Vue/Fonction.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Modele/Navire.java</file>
+            <file>file:/C:/Users/kanab/OneDrive/Projects/NetBeansProjects/BatailleNavaleProject/BatailleNavale/src/Modele/Destroyer.java</file>
         </group>
     </open-files>
 </project-private>
