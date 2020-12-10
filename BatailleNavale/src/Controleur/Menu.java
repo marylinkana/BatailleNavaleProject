@@ -1,7 +1,7 @@
 package Controleur;
 
 import Vue.Fonction;
-import Vue.Grille;
+import Vue.Jeux;
 import java.io.* ;
 
 public class Menu{
@@ -31,7 +31,7 @@ public class Menu{
 
             switch (menu){
                 case 1 :
-                    Grille grille = new Grille();
+                    Jeux grille = new Jeux();
                     confirm = fonction.Quitter(confirm) ;	
                 break ;
 

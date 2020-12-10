@@ -23,6 +23,8 @@ public class Navire {
         this.puissance = puissance;
         this.position = position;
     }
+    
+    public Navire(){}
 
     public String getType() {
         return type;

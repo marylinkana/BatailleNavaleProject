@@ -9,9 +9,9 @@ public class Fonction{
     /*
      * Permet de gérer le positionnement en longueur ou en largeur
      */
-    public int Coordonnee(int a) throws IOException{
+    public int sensNavire() throws IOException{
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
-
+        int sens = 0;
         boolean erreur ;
 
         do
@@ -21,10 +21,10 @@ public class Fonction{
             {
                 do
                 {
-                    System.out.println("Le voulez-vous en :\n1. longeur\n2. hauteur") ;
-                    a = Integer.parseInt(in.readLine()) ;
+                    System.out.println("Le voulez-vous en :\n1: longeur\n2: hauteur") ;
+                    sens = Integer.parseInt(in.readLine()) ;
                 }
-                while (a < 1 || a > 2) ;
+                while (sens < 1 || sens > 2) ;
             }
             catch (NumberFormatException e){
                 System.out.println("Veuillez entrer un entier\n");
@@ -33,16 +33,16 @@ public class Fonction{
         }
         while(erreur != false) ;
 
-        return a ;
+        return sens ;
     }
     
     /*
      * Choix de la ligne de départ
      */
-    public int Ligne(int a) throws IOException
+    public int abscisse() throws IOException
     {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
-
+        int abscisse = 0;
         boolean erreur = false ;
 
         do
@@ -54,9 +54,9 @@ public class Fonction{
                 do
                 {
                     System.out.println("\nEntrez la ligne de depart") ;
-                    a = Integer.parseInt(in.readLine()) ;
+                    abscisse = Integer.parseInt(in.readLine()) ;
                 }
-                while (a < 1 || a > 15) ;
+                while (abscisse < 1 || abscisse > 15) ;
             }
             catch (NumberFormatException e)
             {
@@ -66,16 +66,16 @@ public class Fonction{
         }
         while(erreur != false) ;
 
-       return a ;
+       return abscisse ;
     }
     
     /*
      * Choix de la colonne de départ
      */
-    public int Colonne(int a) throws IOException 
+    public int ordonnee() throws IOException 
     {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
-
+        int ordonnee = 0;
         boolean erreur = false ;
 
         do
@@ -87,9 +87,9 @@ public class Fonction{
                 do
                 {
                     System.out.println("\nEntrez la colonne de depart") ;
-                    a = Integer.parseInt(in.readLine()) ;
+                    ordonnee = Integer.parseInt(in.readLine()) ;
                 }
-                while (a < 1 || a > 15) ;
+                while (ordonnee < 1 || ordonnee > 15) ;
             }
             catch (NumberFormatException e)
             {
@@ -99,7 +99,7 @@ public class Fonction{
         }
         while(erreur != false) ;
 
-        return a ;
+        return ordonnee ;
     }
     
     /*
@@ -198,30 +198,36 @@ public class Fonction{
     public void navireJoueur(String [][] grille, int nbre) throws IOException
     {
         Fonction fonction = new Fonction();
-
+        
+        Navire navire = new Navire();
+        
+        int sens = fonction.sensNavire() ;
+                       
         int erreur = 0 ;
-        int coordonnee = 0 ;
-
-        int ligne = 0 ;
-        int colonne = 0 ;
         int i = 0 ;
-
-        coordonnee = fonction.Coordonnee(coordonnee) ;
-
+        
         do
         {
             erreur = 1 ;
 
-            ligne = fonction.Ligne(ligne) ;
-
-            colonne = fonction.Colonne(colonne) ;
-
-
-            switch (coordonnee)
+            if(nbre == 9){
+                navire = new Croiseur(sens, new Coordonnee(fonction.abscisse(), fonction.ordonnee()));
+            }        
+            if(nbre == 7){
+                navire = new Cuirasse(sens, new Coordonnee(fonction.abscisse(), fonction.ordonnee()));
+            }        
+            if(nbre == 3){
+                navire = new Destroyer(sens, new Coordonnee(fonction.abscisse(), fonction.ordonnee()));
+            }        
+            if(nbre == 1){
+                navire = new SousMarin(sens, new Coordonnee(fonction.abscisse(), fonction.ordonnee()));
+            }
+            
+            switch (sens)
             {
                 case 1 :
                 {
-                    if((colonne + nbre) > 16)
+                    if((navire.getPosition().getOrdonne() + nbre) > 16)
                     {
                         erreur = 0 ;
                     }
@@ -229,62 +235,62 @@ public class Fonction{
                     {
                         do
                         {
-                            i = colonne ;
+                            i = navire.getPosition().getOrdonne();
 
-                            for (int j = colonne ; j < (colonne + nbre) ; j++)
+                            for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + nbre) ; j++)
                             {
-                                if(grille[ligne][j] == "\04")
+                                if(grille[navire.getPosition().getAbscisse()][j] == "\04")
                                 {
                                     erreur = 0 ;
-                                    i = colonne + nbre ;
+                                    i = navire.getPosition().getOrdonne() + nbre ;
                                 }
                             }
 
                             if (erreur != 0)
                             {
-                                for (int j = colonne ; j < (colonne + nbre) ; j++)
+                                for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + nbre) ; j++)
                                 {
-                                    grille[ligne][j] = "\04" ;
+                                    grille[navire.getPosition().getAbscisse()][j] = "\04" ;
                                 }
-                                i = colonne + nbre ;
+                                i = navire.getPosition().getOrdonne() + nbre ;
                             }
                         }
-                        while(i < colonne + nbre );
+                        while(i < navire.getPosition().getOrdonne() + nbre );
                     }
                 }
                 break ;
 
                 case 2 :
                 {
-                    if((ligne + nbre) > 16)
+                    if((navire.getPosition().getAbscisse() + nbre) > 16)
                     {
-                            erreur = 0 ;
+                        erreur = 0 ;
                     }
                     else
                     {
                         do
                         {
-                            i = ligne ;
+                            i = navire.getPosition().getAbscisse() ;
 
-                            for (int j = ligne ; j < (ligne + nbre) ; j++)
+                            for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + nbre) ; j++)
                             {
-                                if(grille[j][colonne] == "\04")
+                                if(grille[j][navire.getPosition().getOrdonne()] == "\04")
                                 {
                                     erreur = 0 ;
-                                    i = ligne + nbre ;
+                                    i = navire.getPosition().getAbscisse() + nbre ;
                                 }
                             }
 
                             if (erreur != 0)
                             {
-                                for (int j = ligne ; j < (ligne + nbre) ; j++)
+                                for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + nbre) ; j++)
                                 {
-                                    grille[j][colonne] = "\04" ;
+                                    grille[j][navire.getPosition().getOrdonne()] = "\04" ;
                                 }
-                                i = ligne + nbre ;
+                                i = navire.getPosition().getAbscisse() + nbre ;
                             }
                         }
-                        while(i < ligne + nbre);
+                        while(i < navire.getPosition().getAbscisse() + nbre);
                     }
                 }
                 break ;
@@ -304,8 +310,8 @@ public class Fonction{
         {
            int i = 0 ;
            int coordonnee = (int)(Math.random() * (2) + 1) ;
-           int ligne = (int)(Math.random() * (15) + 1) ;
-           int colonne = (int)(Math.random() * (15) + 1) ;
+           int abscisse = (int)(Math.random() * (15) + 1) ;
+           int ordonnee = (int)(Math.random() * (15) + 1) ;
 
            erreur = 1 ;
 
@@ -313,43 +319,43 @@ public class Fonction{
            {
                case 1 :
                {
-                   if((colonne + nbre) > 11)
+                   if((ordonnee + nbre) > 11)
                    {
-                           erreur = 0 ;
+                        erreur = 0 ;
                    }
                    else
                    {
                        do
                        {
-                           i = colonne ;
+                           i = ordonnee ;
 
-                           for (int j = colonne ; j < (colonne + nbre) ; j++)
+                           for (int j = ordonnee ; j < (ordonnee + nbre) ; j++)
                            {
-                               if(grille[ligne][j] == "\04")
+                               if(grille[abscisse][j] == "\04")
                                {
                                    erreur = 0 ;
-                                   i = colonne + nbre ;
+                                   i = ordonnee + nbre ;
                                }
                            }
 
                            if (erreur != 0)
                            {
-                               for (int j = colonne ; j < (colonne + nbre) ; j++)
+                               for (int j = ordonnee ; j < (ordonnee + nbre) ; j++)
                                {
-                                   grille[ligne][j] = "\04" ;
+                                   grille[abscisse][j] = "\04" ;
 
                                }
-                               i = colonne + nbre ;
+                               i = ordonnee + nbre ;
                            }
                        }
-                       while(i < colonne + nbre );
+                       while(i < ordonnee + nbre );
                    }
                }
                break ;
 
                case 2 :
                {
-                   if((ligne + nbre) > 16)
+                   if((abscisse + nbre) > 16)
                    {
                        erreur = 0 ;
                    }
@@ -357,52 +363,33 @@ public class Fonction{
                    {
                        do
                        {
-                           i = ligne ;
+                           i = abscisse ;
 
-                           for (int j = ligne ; j < (ligne + nbre) ; j++)
+                           for (int j = abscisse ; j < (abscisse + nbre) ; j++)
                            {
-                               if(grille[j][colonne] == "\04")
+                               if(grille[j][ordonnee] == "\04")
                                {
                                    erreur = 0 ;
-                                   i = ligne + nbre ;
+                                   i = abscisse + nbre ;
                                }
                            }
 
                            if (erreur != 0)
                            {
-                               for (int j = ligne ; j < (ligne + nbre) ; j++)
+                               for (int j = abscisse ; j < (abscisse + nbre) ; j++)
                                {
-                                   grille[j][colonne] = "\04" ;
+                                   grille[j][ordonnee] = "\04" ;
                                }
-                               i = ligne + nbre ;
+                               i = abscisse + nbre ;
                            }
                        }
-                       while(i < ligne + nbre );
+                       while(i < abscisse + nbre );
                    }
                }
                break ;
            }
        }
        while(erreur != 1) ;
-    }
-
-    /*
-     * Permet de quitter le jeux
-     */
-    public int Quitter(int confirm) throws IOException
-    {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
-
-        do
-        {
-            System.out.println("\nSouhaitez-vous quitter le jeu ?") ;
-            System.out.println("1: non ") ;
-            System.out.println("2: oui ") ;
-            confirm = Integer.parseInt(in.readLine()) ;
-        }
-        while (confirm < 1 || confirm > 2) ;
-
-        return confirm ;
     }
 
     /*
@@ -425,31 +412,30 @@ public class Fonction{
         fonction.navireJoueur(grille, 9) ;
 
         /*
-         * Choix des coordonn�es pour le Cuirassé 7 cases
+         * Choix des coordonnées pour le Cuirassé 7 cases
          */
         System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
         System.out.println("Placer votre Cuirassé \n") ;
 
         fonction.FirstPrint(grille) ;
+        fonction.navireJoueur(grille, 7) ;
 
-        fonction.navireJoueur(grille, 4) ;
-
-        //Choix des coordonn�es pour le Destroyer 3 cases			
-
+        /*
+         * Choix des coordonnées pour le Destroyer 3 cases
+         */        
         System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
         System.out.println("Placer votre Destroyer 7\n") ;
 
         fonction.FirstPrint(grille) ;
-
         fonction.navireJoueur(grille, 3) ;
 
-        //Choix des coordonn�es pour le SousMarin 1 cases
-
+        /*
+         * Choix des coordonnées pour le SousMarin 1 cases
+         */
         System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-        System.out.println("Placer votre bateau a 2 cases\n") ;
+        System.out.println("Placer votre SousMarin\n") ;
 
         fonction.FirstPrint(grille) ;
-
         fonction.navireJoueur(grille, 1) ;
     }
 
@@ -461,19 +447,22 @@ public class Fonction{
        Fonction fonction = new Fonction() ;
 
        /*
-        *Choix des coordonn�es pour le Croiseur � 9 cases
+        *Positionement du Croiseur � 9 cases
         */	
        fonction.navireOrdi(grilleOrdi, 9) ;
+       
        /*
-        *Choix des coordonn�es pour le Croiseur � 7 cases
+        *Positionement du Croiseur � 7 cases
         */
        fonction.navireOrdi(grilleOrdi, 7) ;
+       
        /*
-        *Choix des coordonn�es pour le Croiseur � 3 cases
+        *Positionement du Croiseur � 3 cases
         */ 
-       fonction.navireOrdi(grilleOrdi, 3) ;;
+       fonction.navireOrdi(grilleOrdi, 3) ;
+       
        /*
-        *Choix des coordonn�es pour le Croiseur � 1 case
+        *Positionement du Croiseur � 1 case
         */
        fonction.navireOrdi(grilleOrdi, 1) ;
     }
@@ -500,4 +489,24 @@ public class Fonction{
             System.out.println() ;
         }
     }
+    
+    /*
+     * Permet de quitter le jeux
+     */
+    public int Quitter(int confirm) throws IOException
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+
+        do
+        {
+            System.out.println("\nSouhaitez-vous quitter le jeu ?") ;
+            System.out.println("1: non ") ;
+            System.out.println("2: oui ") ;
+            confirm = Integer.parseInt(in.readLine()) ;
+        }
+        while (confirm < 1 || confirm > 2) ;
+
+        return confirm ;
+    }
+
 }
