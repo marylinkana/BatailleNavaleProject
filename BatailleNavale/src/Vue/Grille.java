@@ -1,164 +1,286 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Vue;
+import java.io.* ;
 
-import Modele.Navire;
-import Modele.Croiseur;
-import Modele.Cuirasse;
-import Modele.Destroyer;
-import Modele.SousMarin;
-import Modele.Coordonnee;
-import java.util.ArrayList;
-import java.util.Random;
+public class Grille
+	{
 
-/**
- *
- * @author nabil
- */
-public class Grille {
-    
-    private ArrayList<Navire> navires = new ArrayList<Navire>();
-    private char[][] grille = new char[15][15];
-    
-    public Coordonnee positionNavire(){
-        Random random = new Random();
-        int pos1 = (int)random.nextInt(5);
-        int pos2 = (int)random.nextInt(5);
-        return new Coordonnee(pos1, pos2);
-    }
-    
-    private ArrayList<Navire> genererNavires(){
-        Croiseur croiseur = new Croiseur("longueur", new Coordonnee(1, 2));
-        Cuirasse cuirasse = new Cuirasse("longueur", new Coordonnee(2, 3));
-        Destroyer destroyer = new Destroyer("longueur", new Coordonnee(3, 4));
-        SousMarin sousMarin = new SousMarin("longueur", new Coordonnee(4, 5));
-        this.navires.add(croiseur);
-        this.navires.add(cuirasse);
-        this.navires.add(destroyer);
-        this.navires.add(sousMarin);
-        return this.navires;
-    }
-    
-    public void positionner(ArrayList<Navire> navires,int i,int j){
-        int x = navires.get(i).getPosition().getAbscisse()-1;
-        int y = navires.get(i).getPosition().getOrdonne()-1;
-        if(navires.get(i) instanceof Croiseur){
-            if(navires.get(i).sens == "longueur"){
-                if(i == x && (j >= y && j <= y+8)){
-                    grille[i][j] = '€';
-                }
-                else {
-                    grille[i][j] = '~';
-                }
-            }
-            else if(y == j && (i >= x || i <= x+8)){
-                    grille[i][j] = '€';
-                }
-                else {
-                    grille[i][j] = '~';
-                }
-        }
-        if(navires.get(i) instanceof Cuirasse){
-            if(navires.get(i).sens == "longueur"){
-                if(i == x && (j >= y && j <= y+6)){
-                        grille[i][j] = '#';
-                }
-                else {
-                    grille[i][j] = '~';
-                }
-            }
-            else if(y == j && (i >= x || i <= x+6)){
-                    grille[i][j] = '#';
-                }
-                else {
-                    grille[i][j] = '~';
-                }
-        }
-        if(navires.get(i) instanceof Destroyer){
-            if(navires.get(i).sens == "longueur"){
-                if(i == x && (j >= y && j <= y+2)){
-                        grille[i][j] = '£';
-                }
-                else {
-                    grille[i][j] = '~';
-                }
-            }
-            else if(y == j && (i >= x || i <= x+2)){
-                    grille[i][j] = '£';
-                }
-                else {
-                    grille[i][j] = '~';
-                }
-        }
-        if(navires.get(i) instanceof SousMarin){
-            if(navires.get(i).sens == "longueur"){
-                if(i == x && j == y){
-                        grille[i][j] = '@';
-                }
-                else {
-                    grille[i][j] = '~';
-                }
-            }
-            else if(i == x && j == y){
-                    grille[i][j] = '@';
-                }
-                else {
-                    grille[i][j] = '~';
-                }
-        }
-        
-    }
-    
+	public Grille() throws IOException{
+		
+            BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+            Fonction fonction = new Fonction();
+			
+            String grille[][] = new String[16][16] ;
+            String grilleOrdi[][] = new String[16][16] ;
+            String grilleCachee[][] = new String[16][16] ; 
+            String vous = "";
+            String adversaire = "" ;
+            int ligne = 0 ;
+            int colonne = 0 ; 
+            int coordonnee = 0 ;  
+            int compteur = 1 ;
+            int touche = 0 ;
+            int toucheA = 0 ;
+            int col = 0 ;
+            int ln = 0 ;
+            int choix = 0 ;
+            int ok  = 0 ;
+            int continuer = 0 ; 
+            int ligneDevinee = 0 ;
+            int colonneDevinee = 0 ;
 
-    /** 
-     * Fonction initialisant une grille en début de partie
-     * avec des ~~
-     */
+	    /*
+             * Création des 2 grilles
+             */
+	    for (int i = 0 ; i < 16 ; i++){
+	        for (int j = 0 ; j < 16 ; j++){
+                    grille[i][j] = "*" ;
+                    grilleOrdi[i][j] = "*" ;
+                    grilleCachee[i][j] = "*" ;
+                }	
+            }
+	                         
+            for (int i = 0 ; i < 16 ; i++) {
+                grille[i][0] = i + "" ;
+                grille[0][i] = i + "" ;			
+                grilleOrdi[i][0] = i + "" ;
+                grilleOrdi[0][i] = i + "" ;	
+                grilleCachee[i][0] = i + "" ;
+                grilleCachee[0][i] = i + "" ;			
+            }
 
-    public void initialiser(){
-        for (int i = 0;i < grille.length+1; i++) {
-            if(i<9){
-                System.out.print(i + "  ");
-            }
-            else System.out.print(i + " ");
-        }
-        System.out.print("          ");
-        
-        for (int k = 0;k < grille.length+1; k++) {
-            if(k<9){
-                System.out.print(k + "  ");
-            }
-            else System.out.print(k + " ");
-        }
-        System.out.println();
-        
-        
-        for (int i = 0;i < grille.length; i++) {
-            if(i<9){
-                System.out.print(i+1 + "  ");
-            }
-            else System.out.print(i+1 + " ");
-            for (int j = 0;j < grille.length;j++) {
-               positionner(genererNavires(), i, j);
-               System.out.print(grille[i][j] + "  ");
-            }
-            System.out.print("         ");
-            
-            if(i<9){
-                System.out.print(i+1 + "  ");
-            }
-            else System.out.print(i+1 + " ");
-            for (int j = 0;j < grille.length;j++) {
-               grille[i][j] = '~';
-               System.out.print(grille[i][j] + "  ");
-            }
-            System.out.println();
-        } 
-    }
+		/*
+                 * Placement des bateaux de l'ordinateur
+                 */
+		fonction.Ordi(grilleOrdi) ;
+				
+		/*
+                 * Placement des bateaux du joueur
+                 */
+		System.out.println("\nJOUER CONTRE L'ORDINATEUR,") ;
 
+		System.out.println("\nEntrez votre nom") ;
+		vous = in.readLine() ;	
+		System.out.println() ;
+
+		fonction.Joueur(grille, vous) ;			
+	
+		do
+			{
+						
+			System.out.println("   " + vous.toUpperCase() + "              " + "l'ordi" + "\n") ;
+						
+			fonction.SecondPrint(grille, grilleCachee) ;		
+							
+							
+			if (compteur % 2 == 1) 
+				{	
+				do
+					{
+					ligneDevinee = fonction.Ligne(ligneDevinee) ;	
+					colonneDevinee = fonction.Colonne(colonneDevinee) ;
+					}
+				while (grilleCachee[ligneDevinee][colonneDevinee] == " " || grilleCachee[ligneDevinee][colonneDevinee] == "X") ;
+			
+				if (grilleOrdi[ligneDevinee][colonneDevinee] == "*")
+					{
+					grilleCachee[ligneDevinee][colonneDevinee] = " " ;	
+					}	
+				else if (grilleOrdi[ligneDevinee][colonneDevinee] == "\04")
+						{
+						grilleCachee[ligneDevinee][colonneDevinee] = "X" ;
+						toucheA = toucheA + 1 ;
+						}
+							
+				compteur = compteur + 1 ;	
+				}
+			else
+				{
+		if(continuer == 0) 
+			{
+			do
+				{
+				ligne = (int)(Math.random() * (15) + 1) ;
+				colonne = (int)(Math.random() * (15) + 1) ;	
+				}					
+			while(grille[ligne][colonne] == " " || grille[ligne][colonne] == "X") ;
+		
+				
+			if (grille[ligne][colonne] == "*")
+				{
+				grille[ligne][colonne] = " " ;
+				continuer = 0 ;	
+				}	
+			else if (grille[ligne][colonne] == "\04")
+					{
+					grille[ligne][colonne] = "X" ;
+					touche = touche + 1 ;
+					continuer = 1 ;
+					ln = ligne ;
+					col = colonne ;
+					choix = 1 ;
+					}
+			}
+		else
+			{
+			if (choix == 1 && ln - 1 == 0)
+				{
+				choix = choix + 1 ;	
+				ln = ligne ;
+				col = colonne ;
+				continuer = 1; 
+				} 
+			if (choix == 2 && col - 1 == 0)
+				{
+				choix = choix + 1 ;	
+				col = colonne ;
+				ln = ligne ;
+				continuer = 1 ;
+				}
+			if(choix == 3 && col + 1 == 16)
+				{
+				choix = choix + 1 ;	
+				col = colonne ;
+				ln = ligne ;
+				continuer = 1 ;	
+				}
+			if(choix == 4 && ln + 1 == 16)
+				{
+				choix = 0 ;	
+				col = colonne ;
+				ln = ligne ;
+				continuer = 0 ;	
+				}	 			
+				
+				switch (choix) 
+					{
+						case 1 :
+							{
+							if (grille[ln-1][col] != "\04" && grille[ln-1][col] != "X")
+							{
+							grille[ln-1][col] = " " ;
+							choix = choix + 1 ;
+							ln = ligne ;
+							col = colonne ;	
+							continuer = 1;								
+							}	
+						else if (grille[ln-1][col] == "\04") 
+								{
+								grille[ln-1][col] = "X" ;
+								touche = touche + 1 ;
+								ln = ln - 1 ;
+								col = col ;
+								continuer = 1;	
+								}
+							else if(grille[ln-1][col] == "X")
+								{
+								ln = ln - 1 ;
+								col = col ;		
+								}
+							}
+						break ;
+						
+						case 2 :
+							{
+							if (grille[ln][col-1] != "\04" && grille[ln][col-1] != "X")
+								{
+								grille[ln][col-1] = " " ;
+								choix = choix + 1 ;	
+								ln = ligne ;
+								col = colonne ;	
+								continuer = 1;						
+								}	
+							else if (grille[ln][col-1] == "\04")
+									{
+									grille[ln][col-1] = "X" ;
+									touche = touche + 1 ;
+									ln = ln ;
+									col = col - 1 ;
+									continuer = 1;	
+									}
+								else if(grille[ln][col-1] == "X")
+										{
+										ln = ln ;
+										col = col - 1 ;		
+										}	
+								}
+						break ;	
+						
+						
+						case 3 :
+							{
+							if (grille[ln][col+1] != "\04" && grille[ln][col+1] != "X")
+								{
+								grille[ln][col+1] = " " ;
+								choix = choix + 1 ;	
+								ln = ligne ;
+								col = colonne ;
+								continuer = 1;									
+								}	
+							else if (grille[ln][col+1] == "\04")
+									{
+									grille[ln][col+1] = "X" ;
+									touche = touche + 1 ;
+									ln = ln ;
+									col = col+1 ;
+									continuer = 1;	
+									}
+								else if(grille[ln][col+1] == "X")
+										{
+										ln = ln ;
+										col = col + 1 ;		
+										}
+							}
+						break ;	
+
+
+						case 4 :
+							{
+							if (grille[ln+1][col] != "\04" && grille[ln+1][col] != "X")
+								{
+								grille[ln+1][col] = " " ;
+								choix = 0 ;
+								ok = 0 ;
+								ln = ligne ;
+								col = colonne ;	
+								continuer = 0 ;								
+								}	
+							else if (grille[ln+1][col] == "\04")
+									{
+									grille[ln+1][col] = "X" ;
+									touche = touche + 1 ;
+									ln = ln + 1 ;
+									col = col ;	
+									continuer = 1;	
+									}
+								else if(grille[ln+1][col] == "X")
+									{
+									ln = ln + 1;
+									col = col ;		
+									}
+							}
+						break ;	 
+
+								
+					}
+				}
+				compteur = compteur + 1 ;
+				}
+		 		
+			}
+		while(touche != 17 && toucheA != 17) ;
+				
+		if (toucheA == 17) 
+			{
+			fonction.SecondPrint(grille, grilleCachee) ;
+			System.out.println(vous + " : vous avez gagne") ;
+				
+			}
+		else
+			{
+			fonction.SecondPrint(grille, grilleCachee) ;
+			System.out.println(vous + " : vous avez perdu") ;
+			}	
+							
+	}
 }
-
 

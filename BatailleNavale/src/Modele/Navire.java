@@ -11,12 +11,12 @@ package Modele;
  */
 public class Navire {
     public String type;
-    public String sens;
+    public int sens;
     public int taille;
     public int puissance;
     public Coordonnee position;
 
-    public Navire(String type, String sens, int taille, int puissance, Coordonnee position) {
+    public Navire(String type, int sens, int taille, int puissance, Coordonnee position) {
         this.type = type;
         this.sens = sens;
         this.taille = taille;
@@ -32,11 +32,11 @@ public class Navire {
         this.type = type;
     }
 
-    public String getSens() {
+    public int getSens() {
         return sens;
     }
 
-    public void setSens(String sens) {
+    public void setSens(int sens) {
         this.sens = sens;
     }
     

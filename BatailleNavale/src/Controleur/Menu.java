@@ -15,12 +15,11 @@ public class Menu{
 
         Fonction fonction = new Fonction() ;
 
-
         do{
             do{
                 try{ 
                     System.out.println("MENU\n") ;
-                    System.out.println("1: Jouer\n") ;
+                    System.out.println("1: Jouer") ;
                     System.out.println("0: Quitter le jeu\n") ;
                     menu = Integer.parseInt(in.readLine()) ;
                 }

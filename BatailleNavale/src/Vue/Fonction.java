@@ -1,6 +1,8 @@
 package Vue;
 
-import java.io.* ;
+import java.io.*;
+import Modele.*;
+
 
 public class Fonction{
     
@@ -33,8 +35,11 @@ public class Fonction{
 
         return a ;
     }
-
-    public int Ligne(int a) throws IOException // ligne de d�part
+    
+    /*
+     * Choix de la ligne de départ
+     */
+    public int Ligne(int a) throws IOException
     {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
 
@@ -63,8 +68,11 @@ public class Fonction{
 
        return a ;
     }
-
-    public int Colonne(int a) throws IOException // colonne de d�part
+    
+    /*
+     * Choix de la colonne de départ
+     */
+    public int Colonne(int a) throws IOException 
     {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
 
@@ -85,7 +93,7 @@ public class Fonction{
             }
             catch (NumberFormatException e)
             {
-                System.out.println("Veuillez entrer un entier entre 1 et 10\n");
+                System.out.println("Veuillez entrer un entier entre 1 et 15\n");
                 erreur = true ;
             }
         }
@@ -93,8 +101,11 @@ public class Fonction{
 
         return a ;
     }
-
-    public void FirstPrint(String a [][]) // Affiche la grille quand vous placez les bateaux
+    
+    /*
+     * Positionne la première grille
+     */
+    public void FirstPrint(String a [][])
     {
         for (int i = 0 ; i < 16 ; i++){
             for (int j = 0 ; j < 16 ; j++){
@@ -116,388 +127,377 @@ public class Fonction{
         System.out.println() ;
     }
 
+    /*
+     * Positionne les deux grilles cote à cote
+     */
+    public void SecondPrint(String a [][], String b [][])
+    {
+        for (int i = 0 ; i < 16 ; i++)
+        {
+            for (int j = 0 ; j < 16 ; j++)
+            {
+                if (j == 0 && i == 0)
+                {
+                    System.out.print("   ") ;
+                }
+                else
+                {
+                    if (j == 0 && i == 15)
+                    {
+                        System.out.print(a[i][j] + " ") ;
+                    }
+                    else
+                    {
+                        if(j == 0)
+                        {
+                            System.out.print(a[i][j] + "  ") ;
+                        }
+                        else
+                        {
+                            System.out.print(a[i][j]) ;
+                        }
+                    }
+                }
+            }
 
-     public void SecondPrint(String a [][], String b [][]) // Affiche les deux grilles, cotes � cotes
-     {
-             for (int i = 0 ; i < 16 ; i++)
-             {
-                     for (int j = 0 ; j < 16 ; j++)
-                     {
-                             if (j == 0 && i == 0)
-                             {
-                                     System.out.print("   ") ;
-                             }
-                             else
-                             {
-                                     if (j == 0 && i == 15)
-                                     {
-                                             System.out.print(a[i][j] + " ") ;
-                                     }
-                                     else
-                                     {
-                                             if(j == 0)
-                                             {
-                                                     System.out.print(a[i][j] + "  ") ;
-                                             }
-                                             else
-                                             {
-                                                     System.out.print(a[i][j]) ;
-                                             }
-                                     }
-                             }
-                     }
+            System.out.print("         ") ;
 
-                     System.out.print("         ") ;
-
-                     for (int k = 0 ; k < 16 ; k++)
-                     {
-                             if (i == 0 && k == 0)
-                             {
-                                     System.out.print("  ") ;
-                             }
-                             else
-                             {
-                                     if (k == 0 && i == 15)
-                                     {
-                                             System.out.print(b[i][k] + " ") ;
-                                     }
-                                     else
-                                     {
-                                             if(k == 0)
-                                             {
-                                                     System.out.print(b[i][k] + "  ") ;
-                                             }
-                                             else
-                                             {
-                                                     System.out.print(b[i][k]) ;
-                                             }
-                                     }
-                             }
-                     }
-                     System.out.println() ;
-             }
-
-             System.out.println() ;
+            for (int k = 0 ; k < 16 ; k++)
+            {
+                if (i == 0 && k == 0)
+                {
+                    System.out.print("  ") ;
+                }
+                else
+                {
+                    if (k == 0 && i == 15)
+                    {
+                        System.out.print(b[i][k] + " ") ;
+                    }
+                    else
+                    {
+                        if(k == 0)
+                        {
+                            System.out.print(b[i][k] + "  ") ;
+                        }
+                        else
+                        {
+                            System.out.print(b[i][k]) ;
+                        }
+                    }
+                }
+            }
+            System.out.println() ;
+        }
+        System.out.println() ;
      }
-
-     public void Bateau(String [][] grille, int nbre) throws IOException
-     {
-
-             Fonction fonction = new Fonction();
-
-             int erreur = 0 ;
-             int coordonnee = 0 ;
-
-             int ligne = 0 ;
-             int colonne = 0 ;
-             int i = 0 ;
-
-             coordonnee = fonction.Coordonnee(coordonnee) ;
-
-             do
-             {
-                     erreur = 1 ;
-
-                     ligne = fonction.Ligne(ligne) ;
-
-                     colonne = fonction.Colonne(colonne) ;
-
-
-                     switch (coordonnee)
-                     {
-                             case 1 :
-                             {
-
-                                     if((colonne + nbre) > 16)
-                                     {
-                                             erreur = 0 ;
-                                     }
-                                     else
-                                     {
-                                             do
-                                             {
-                                                     i = colonne ;
-
-                                                     for (int j = colonne ; j < (colonne + nbre) ; j++)
-                                                     {
-                                                             if(grille[ligne][j] == "\04")
-                                                             {
-                                                                     erreur = 0 ;
-                                                                     i = colonne + nbre ;
-                                                             }
-                                                     }
-
-                                                     if (erreur != 0)
-                                                     {
-                                                             for (int j = colonne ; j < (colonne + nbre) ; j++)
-                                                             {
-                                                                     grille[ligne][j] = "\04" ;
-
-                                                             }
-                                                             i = colonne + nbre ;
-                                                     }
-                                             }
-                                             while(i < colonne + nbre );
-                                     }
-
-                             }
-                             break ;
-
-                             case 2 :
-                             {
-                                     if((ligne + nbre) > 16)
-                                     {
-                                             erreur = 0 ;
-                                     }
-                                     else
-                                     {
-                                             do
-                                             {
-                                                     i = ligne ;
-
-                                                     for (int j = ligne ; j < (ligne + nbre) ; j++)
-                                                     {
-                                                             if(grille[j][colonne] == "\04")
-                                                             {
-                                                                     erreur = 0 ;
-                                                                     i = ligne + nbre ;
-                                                             }
-                                                     }
-
-                                                     if (erreur != 0)
-                                                     {
-                                                             for (int j = ligne ; j < (ligne + nbre) ; j++)
-                                                             {
-                                                                     grille[j][colonne] = "\04" ;
-
-                                                             }
-                                                             i = ligne + nbre ;
-                                                     }
-                                             }
-                                             while(i < ligne + nbre);
-                                     }
-                             }
-                             break ;
-                     }
-             }
-             while(erreur != 1) ;
-     }
-
-     public void BateauOrdi(String grille [][], int nbre)
-     {
-
-             int erreur = 0 ;
-
-             do
-             {
-                     int i = 0 ;
-                     int coordonnee = (int)(Math.random() * (2) + 1) ;
-                     int ligne = (int)(Math.random() * (15) + 1) ;
-                     int colonne = (int)(Math.random() * (15) + 1) ;
-
-                     erreur = 1 ;
-
-                     switch (coordonnee)
-                     {
-                             case 1 :
-                             {
-                                     if((colonne + nbre) > 11)
-                                     {
-                                             erreur = 0 ;
-                                     }
-                                     else
-                                     {
-                                             do
-                                             {
-                                                     i = colonne ;
-
-                                                     for (int j = colonne ; j < (colonne + nbre) ; j++)
-                                                     {
-                                                             if(grille[ligne][j] == "\04")
-                                                             {
-                                                                     erreur = 0 ;
-                                                                     i = colonne + nbre ;
-                                                             }
-                                                     }
-
-                                                     if (erreur != 0)
-                                                     {
-                                                             for (int j = colonne ; j < (colonne + nbre) ; j++)
-                                                             {
-                                                                     grille[ligne][j] = "\04" ;
-
-                                                             }
-                                                             i = colonne + nbre ;
-                                                     }
-                                             }
-                                             while(i < colonne + nbre );
-                                     }
-                             }
-                             break ;
-
-                             case 2 :
-                             {
-                                     if((ligne + nbre) > 16)
-                                     {
-                                             erreur = 0 ;
-                                     }
-                                     else
-                                     {
-                                             do
-                                             {
-                                                     i = ligne ;
-
-                                                     for (int j = ligne ; j < (ligne + nbre) ; j++)
-                                                     {
-                                                             if(grille[j][colonne] == "\04")
-                                                             {
-                                                                     erreur = 0 ;
-                                                                     i = ligne + nbre ;
-                                                             }
-                                                     }
-
-                                                     if (erreur != 0)
-                                                     {
-                                                             for (int j = ligne ; j < (ligne + nbre) ; j++)
-                                                             {
-                                                                     grille[j][colonne] = "\04" ;
-
-                                                             }
-                                                             i = ligne + nbre ;
-                                                     }
-                                             }
-                                             while(i < ligne + nbre );
-                                     }
-                             }
-                             break ;
-                     }
-             }
-             while(erreur != 1) ;
-
-
-     }
-
-
-     public int Quitter(int confirm) throws IOException
-     {
-             BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
-
-             do
-             {
-                     System.out.println("\nSouhaitez-vous quitter le jeu ?") ;
-                     System.out.println("1: non ") ;
-                     System.out.println("2: oui ") ;
-                     confirm = Integer.parseInt(in.readLine()) ;
-             }
-             while (confirm < 1 || confirm > 2) ;
-
-             return confirm ;
-     }
-
-
-     public void User(String [][] grille, String vous) throws IOException
-     {
-             BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
-
-             Fonction fonction = new Fonction() ;
-             int [] tabBat5 = new int[10] ;
-             int [] tabBat4 = new int[8] ;
-             int [] tabBat3a = new int[6] ;
-             int [] tabBat3b = new int[6] ;
-             int [] tabBat2 = new int[4] ;
-
-             /*
-              * Choix des coordonn�es pour le croisseur 9 cases
-              */	
-
-             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-             System.out.println("Placer votre Croiseur\n") ;
-
-             fonction.FirstPrint(grille) ;
-
-             fonction.Bateau(grille, 9) ;
-
-             /*
-              * Choix des coordonn�es pour le Cuirassé 7 cases
-              */
-
-             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-             System.out.println("Placer votre bateau a 4 cases\n") ;
-
-             fonction.FirstPrint(grille) ;
-
-             fonction.Bateau(grille, 4) ;
-
-             //Choix des coordonn�es pour le premier bateau � 3 cases			
-
-             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-             System.out.println("Placer votre 1er bateau a 3 cases\n") ;
-
-             fonction.FirstPrint(grille) ;
-
-             fonction.Bateau(grille, 3) ;
-
-             //Choix des coordonn�es pour le deuxi�me bateau � 3 cases
-
-             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-             System.out.println("Placer votre 2 eme bateau a 3 cases\n") ;
-
-             fonction.FirstPrint(grille) ;
-
-             fonction.Bateau(grille, 3) ;
-
-             //Choix des coordonn�es pour le bateau � 2 cases
-
-             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-             System.out.println("Placer votre bateau a 2 cases\n") ;
-
-             fonction.FirstPrint(grille) ;
-
-             fonction.Bateau(grille, 2) ;
-
-     }
-
-
-     public void Ordi(String [][] grilleOrdi) throws IOException
-     {
-             BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
-
-             Fonction fonction = new Fonction() ;
-
-             //Choix des coordonn�es pour le bateau � 5 cases	
-             fonction.BateauOrdi(grilleOrdi, 5) ;
-             //Choix des coordonn�es pour le bateau � 4 cases	
-             fonction.BateauOrdi(grilleOrdi, 4) ;
-             //Choix des coordonn�es pour le premier bateau � 3 cases	
-             fonction.BateauOrdi(grilleOrdi, 3) ;
-             //Choix des coordonn�es pour le deuxi�me bateau � 3 cases	
-             fonction.BateauOrdi(grilleOrdi, 3) ;
-             //Choix des coordonn�es pour le bateau � 2 cases
-             fonction.BateauOrdi(grilleOrdi, 2) ;
-
-     }
-     public void Grille(int colonne, int ligne, String [][] grilleCachee) throws IOException
-     {
-             for (int i = 0 ; i < ligne ; i++)
-             {
-                     for (int j = 0 ; j < colonne ; j++)
-                     {
-                             if(i == ligne-1 && colonne > 0)
-                             {
-                                     System.out.print(grilleCachee[i][j]+ " ") ;
-                             }
-                             else if(i > 0 && j > 0 || j == (colonne-1))
-                             {
-                                     System.out.print(grilleCachee[i][j]+ "  ") ;
-                             }
-                             else
-                             {
-                                     System.out.print(grilleCachee[i][j]+ " ") ;
-                             }
-                     }
-                     System.out.println() ;
-             }
-
-
-     }
+     
+    /*
+     * Place les Navire du joueur
+     */
+    public void navireJoueur(String [][] grille, int nbre) throws IOException
+    {
+        Fonction fonction = new Fonction();
+
+        int erreur = 0 ;
+        int coordonnee = 0 ;
+
+        int ligne = 0 ;
+        int colonne = 0 ;
+        int i = 0 ;
+
+        coordonnee = fonction.Coordonnee(coordonnee) ;
+
+        do
+        {
+            erreur = 1 ;
+
+            ligne = fonction.Ligne(ligne) ;
+
+            colonne = fonction.Colonne(colonne) ;
+
+
+            switch (coordonnee)
+            {
+                case 1 :
+                {
+                    if((colonne + nbre) > 16)
+                    {
+                        erreur = 0 ;
+                    }
+                    else
+                    {
+                        do
+                        {
+                            i = colonne ;
+
+                            for (int j = colonne ; j < (colonne + nbre) ; j++)
+                            {
+                                if(grille[ligne][j] == "\04")
+                                {
+                                    erreur = 0 ;
+                                    i = colonne + nbre ;
+                                }
+                            }
+
+                            if (erreur != 0)
+                            {
+                                for (int j = colonne ; j < (colonne + nbre) ; j++)
+                                {
+                                    grille[ligne][j] = "\04" ;
+                                }
+                                i = colonne + nbre ;
+                            }
+                        }
+                        while(i < colonne + nbre );
+                    }
+                }
+                break ;
+
+                case 2 :
+                {
+                    if((ligne + nbre) > 16)
+                    {
+                            erreur = 0 ;
+                    }
+                    else
+                    {
+                        do
+                        {
+                            i = ligne ;
+
+                            for (int j = ligne ; j < (ligne + nbre) ; j++)
+                            {
+                                if(grille[j][colonne] == "\04")
+                                {
+                                    erreur = 0 ;
+                                    i = ligne + nbre ;
+                                }
+                            }
+
+                            if (erreur != 0)
+                            {
+                                for (int j = ligne ; j < (ligne + nbre) ; j++)
+                                {
+                                    grille[j][colonne] = "\04" ;
+                                }
+                                i = ligne + nbre ;
+                            }
+                        }
+                        while(i < ligne + nbre);
+                    }
+                }
+                break ;
+            }
+        }
+        while(erreur != 1) ;
+    }
+     
+    /*
+     * Place les navires de l'ordinateur dans la grille
+     */
+    public void navireOrdi(String grille [][], int nbre)
+    {
+        int erreur = 0 ;
+
+        do
+        {
+           int i = 0 ;
+           int coordonnee = (int)(Math.random() * (2) + 1) ;
+           int ligne = (int)(Math.random() * (15) + 1) ;
+           int colonne = (int)(Math.random() * (15) + 1) ;
+
+           erreur = 1 ;
+
+           switch (coordonnee)
+           {
+               case 1 :
+               {
+                   if((colonne + nbre) > 11)
+                   {
+                           erreur = 0 ;
+                   }
+                   else
+                   {
+                       do
+                       {
+                           i = colonne ;
+
+                           for (int j = colonne ; j < (colonne + nbre) ; j++)
+                           {
+                               if(grille[ligne][j] == "\04")
+                               {
+                                   erreur = 0 ;
+                                   i = colonne + nbre ;
+                               }
+                           }
+
+                           if (erreur != 0)
+                           {
+                               for (int j = colonne ; j < (colonne + nbre) ; j++)
+                               {
+                                   grille[ligne][j] = "\04" ;
+
+                               }
+                               i = colonne + nbre ;
+                           }
+                       }
+                       while(i < colonne + nbre );
+                   }
+               }
+               break ;
+
+               case 2 :
+               {
+                   if((ligne + nbre) > 16)
+                   {
+                       erreur = 0 ;
+                   }
+                   else
+                   {
+                       do
+                       {
+                           i = ligne ;
+
+                           for (int j = ligne ; j < (ligne + nbre) ; j++)
+                           {
+                               if(grille[j][colonne] == "\04")
+                               {
+                                   erreur = 0 ;
+                                   i = ligne + nbre ;
+                               }
+                           }
+
+                           if (erreur != 0)
+                           {
+                               for (int j = ligne ; j < (ligne + nbre) ; j++)
+                               {
+                                   grille[j][colonne] = "\04" ;
+                               }
+                               i = ligne + nbre ;
+                           }
+                       }
+                       while(i < ligne + nbre );
+                   }
+               }
+               break ;
+           }
+       }
+       while(erreur != 1) ;
+    }
+
+    /*
+     * Permet de quitter le jeux
+     */
+    public int Quitter(int confirm) throws IOException
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+
+        do
+        {
+            System.out.println("\nSouhaitez-vous quitter le jeu ?") ;
+            System.out.println("1: non ") ;
+            System.out.println("2: oui ") ;
+            confirm = Integer.parseInt(in.readLine()) ;
+        }
+        while (confirm < 1 || confirm > 2) ;
+
+        return confirm ;
+    }
+
+    /*
+     * Permet à l'utilisateur de positionner ses navire
+     */
+    public void Joueur(String [][] grille, String vous) throws IOException
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+
+        Fonction fonction = new Fonction() ;
+
+        /*
+         * Choix des coordonnées pour le croisseur 9 cases
+         */	
+        System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
+        System.out.println("Placer votre Croiseur\n") ;
+
+        fonction.FirstPrint(grille) ;
+
+        fonction.navireJoueur(grille, 9) ;
+
+        /*
+         * Choix des coordonn�es pour le Cuirassé 7 cases
+         */
+        System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
+        System.out.println("Placer votre Cuirassé \n") ;
+
+        fonction.FirstPrint(grille) ;
+
+        fonction.navireJoueur(grille, 4) ;
+
+        //Choix des coordonn�es pour le Destroyer 3 cases			
+
+        System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
+        System.out.println("Placer votre Destroyer 7\n") ;
+
+        fonction.FirstPrint(grille) ;
+
+        fonction.navireJoueur(grille, 3) ;
+
+        //Choix des coordonn�es pour le SousMarin 1 cases
+
+        System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
+        System.out.println("Placer votre bateau a 2 cases\n") ;
+
+        fonction.FirstPrint(grille) ;
+
+        fonction.navireJoueur(grille, 1) ;
+    }
+
+
+    public void Ordi(String [][] grilleOrdi) throws IOException
+    {
+       BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+
+       Fonction fonction = new Fonction() ;
+
+       /*
+        *Choix des coordonn�es pour le Croiseur � 9 cases
+        */	
+       fonction.navireOrdi(grilleOrdi, 9) ;
+       /*
+        *Choix des coordonn�es pour le Croiseur � 7 cases
+        */
+       fonction.navireOrdi(grilleOrdi, 7) ;
+       /*
+        *Choix des coordonn�es pour le Croiseur � 3 cases
+        */ 
+       fonction.navireOrdi(grilleOrdi, 3) ;;
+       /*
+        *Choix des coordonn�es pour le Croiseur � 1 case
+        */
+       fonction.navireOrdi(grilleOrdi, 1) ;
+    }
+     
+    public void Grille(int colonne, int ligne, String [][] grilleCachee) throws IOException
+    {
+        for (int i = 0 ; i < ligne ; i++)
+        {
+            for (int j = 0 ; j < colonne ; j++)
+            {
+                if(i == ligne-1 && colonne > 0)
+                {
+                    System.out.print(grilleCachee[i][j]+ " ") ;
+                }
+                else if(i > 0 && j > 0 || j == (colonne-1))
+                {
+                    System.out.print(grilleCachee[i][j]+ "  ") ;
+                }
+                else
+                {
+                    System.out.print(grilleCachee[i][j]+ " ") ;
+                }
+            }
+            System.out.println() ;
+        }
+    }
 }
