@@ -12,7 +12,7 @@ package Modele;
 public class Croiseur extends Navire {
 
     public Croiseur(int sens, Coordonnee position) {
-        super("Croiseur", sens, 5, 4, position);
+        super("Croiseur", "\04", sens, 5, 4, position);
     }
 
     @Override
@@ -78,6 +78,14 @@ public class Croiseur extends Navire {
     @Override
     public String getType() {
         return super.getType(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getSymbole() {
+        return symbole;
+    }
+
+    public void setSymbole(String symbole) {
+        this.symbole = symbole;
     }
 
     

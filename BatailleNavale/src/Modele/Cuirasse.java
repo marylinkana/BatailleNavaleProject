@@ -12,7 +12,7 @@ package Modele;
 public class Cuirasse extends Navire {
 
     public Cuirasse(int sens, Coordonnee position) {
-        super("Cuirasse", sens, 7, 9, position);
+        super("Cuirasse", "€", sens, 7, 9, position);
     }
 
     @Override
@@ -78,6 +78,14 @@ public class Cuirasse extends Navire {
     @Override
     public String getType() {
         return super.getType(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getSymbole() {
+        return symbole;
+    }
+
+    public void setSymbole(String symbole) {
+        this.symbole = symbole;
     }
 
     

@@ -12,7 +12,7 @@ package Modele;
 public class Destroyer extends Navire {
 
     public Destroyer(int sens, Coordonnee position) {
-        super("Destroyer", sens, 3, 1, position);
+        super("Destroyer", "#", sens, 3, 1, position);
     }
 
     @Override
@@ -78,6 +78,14 @@ public class Destroyer extends Navire {
     @Override
     public String getType() {
         return super.getType(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getSymbole() {
+        return symbole;
+    }
+
+    public void setSymbole(String symbole) {
+        this.symbole = symbole;
     }
 
     

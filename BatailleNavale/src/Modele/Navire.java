@@ -11,19 +11,21 @@ package Modele;
  */
 public class Navire {
     public String type;
+    public String symbole;
     public int sens;
     public int taille;
     public int puissance;
     public Coordonnee position;
 
-    public Navire(String type, int sens, int taille, int puissance, Coordonnee position) {
+    public Navire(String type, String symbole, int sens, int taille, int puissance, Coordonnee position) {
         this.type = type;
+        this.symbole = symbole;
         this.sens = sens;
         this.taille = taille;
         this.puissance = puissance;
         this.position = position;
     }
-    
+   
     public Navire(){}
 
     public String getType() {
@@ -33,6 +35,16 @@ public class Navire {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getSymbole() {
+        return symbole;
+    }
+
+    public void setSymbole(String symbole) {
+        this.symbole = symbole;
+    }
+    
+    
 
     public int getSens() {
         return sens;

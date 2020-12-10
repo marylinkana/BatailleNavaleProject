@@ -12,7 +12,7 @@ package Modele;
 public class SousMarin extends Navire {
 
     public SousMarin(int sens, Coordonnee position) {
-        super("SousMarin", sens, 1, 1, position);
+        super("SousMarin", "@", sens, 1, 1, position);
     }
 
     @Override
@@ -78,6 +78,14 @@ public class SousMarin extends Navire {
     @Override
     public String getType() {
         return super.getType(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getSymbole() {
+        return symbole;
+    }
+
+    public void setSymbole(String symbole) {
+        this.symbole = symbole;
     }
     
     
