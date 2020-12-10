@@ -12,7 +12,7 @@ package Modele;
 public class SousMarin extends Navire {
 
     public SousMarin(int sens, Coordonnee position) {
-        super("SousMarin", "@  ", sens, 1, 1, position);
+        super("SousMarin", "@  ", sens, 1, 1, position, true);
     }
 
     @Override
@@ -31,62 +31,8 @@ public class SousMarin extends Navire {
     }
 
     @Override
-    public void setPuissance(int puissance) {
-        super.setPuissance(puissance); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getPuissance() {
-        return super.getPuissance(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setPosition(Coordonnee position) {
-        super.setPosition(position); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Coordonnee getPosition() {
-        return super.getPosition(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setTaille(int taille) {
-        super.setTaille(taille); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getTaille() {
-        return super.getTaille(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setSens(int sens) {
-        super.setSens(sens); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getSens() {
-        return super.getSens(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setType(String type) {
-        super.setType(type); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getType() {
-        return super.getType(); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public String getSymbole() {
-        return symbole;
+        return super.getSymbole(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setSymbole(String symbole) {
-        this.symbole = symbole;
-    }
-    
-    
 }

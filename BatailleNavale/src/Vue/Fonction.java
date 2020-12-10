@@ -101,7 +101,7 @@ public class Fonction{
 
         return ordonnee ;
     }
-    
+ 
     /*
      * ORGANISE LES GRILLES
      */
@@ -265,7 +265,7 @@ public class Fonction{
                             {
                                 for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + nbre) ; j++)
                                 {
-                                    grille[j][navire.getPosition().getOrdonne()] = navire.getSymbole() ;
+                                    grille[j][navire.getPosition().getOrdonne()] = navire.getSymbole();
                                 }
                                 i = navire.getPosition().getAbscisse() + nbre ;
                             }
@@ -273,10 +273,10 @@ public class Fonction{
                         while(i < navire.getPosition().getAbscisse() + nbre);
                     }
                 }
-                break ;
+                break;
             }
         }
-        while(erreur != 1) ;
+        while(erreur != 1);
     }
      
     /*
@@ -284,16 +284,16 @@ public class Fonction{
      */
     public void navireOrdi(String grille [][], int nbre)
     {
-        int erreur = 0 ;
+        int erreur = 0;
         
         Navire navire = new Navire();      
         
         do
         {
-           int i = 0 ;
-           int sens = (int)(Math.random() * (2) + 1) ;
-           int abscisse = (int)(Math.random() * (15) + 1) ;
-           int ordonnee = (int)(Math.random() * (15) + 1) ;
+           int i = 0;
+           int sens = (int)(Math.random() * (2) + 1);
+           int abscisse = (int)(Math.random() * (15) + 1);
+           int ordonnee = (int)(Math.random() * (15) + 1);
            
            if(nbre == 9){
             navire = new Croiseur(sens, new Coordonnee(abscisse, ordonnee));
@@ -308,7 +308,7 @@ public class Fonction{
                 navire = new SousMarin(sens, new Coordonnee(abscisse, ordonnee));
             }
 
-           erreur = 1 ;
+           erreur = 1;
 
            switch (sens)
            {
@@ -322,14 +322,14 @@ public class Fonction{
                    {
                        do
                        {
-                           i = navire.getPosition().getOrdonne() ;
+                           i = navire.getPosition().getOrdonne();
 
                            for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + nbre) ; j++)
                            {
                                if(grille[navire.getPosition().getAbscisse()][j] != "~  ")
                                {
-                                   erreur = 0 ;
-                                   i = navire.getPosition().getOrdonne() + nbre ;
+                                   erreur = 0;
+                                   i = navire.getPosition().getOrdonne() + nbre;
                                }
                            }
 
@@ -337,7 +337,7 @@ public class Fonction{
                            {
                                for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + nbre) ; j++)
                                {
-                                   grille[navire.getPosition().getAbscisse()][j] = navire.getSymbole() ;
+                                   grille[navire.getPosition().getAbscisse()][j] = navire.getSymbole();
 
                                }
                                i = navire.getPosition().getOrdonne() + nbre ;
@@ -346,26 +346,26 @@ public class Fonction{
                        while(i < navire.getPosition().getOrdonne() + nbre );
                    }
                }
-               break ;
+               break;
 
                case 2 :
                {
                    if((navire.getPosition().getAbscisse() + nbre) > 16)
                    {
-                       erreur = 0 ;
+                       erreur = 0;
                    }
                    else
                    {
                        do
                        {
-                           i = navire.getPosition().getAbscisse() ;
+                           i = navire.getPosition().getAbscisse();
 
                            for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + nbre) ; j++)
                            {
                                if(grille[j][navire.getPosition().getOrdonne()] != "~  ")
                                {
-                                   erreur = 0 ;
-                                   i = abscisse + nbre ;
+                                   erreur = 0;
+                                   i = abscisse + nbre;
                                }
                            }
 
@@ -373,7 +373,7 @@ public class Fonction{
                            {
                                for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + nbre) ; j++)
                                {
-                                   grille[j][navire.getPosition().getOrdonne()] = navire.getSymbole() ;
+                                   grille[j][navire.getPosition().getOrdonne()] = navire.getSymbole();
                                }
                                i = navire.getPosition().getAbscisse() + nbre ;
                            }
@@ -381,10 +381,10 @@ public class Fonction{
                        while(i < navire.getPosition().getAbscisse() + nbre );
                    }
                }
-               break ;
+               break;
            }
        }
-       while(erreur != 1) ;
+       while(erreur != 1);
     }
 
     /*
@@ -392,47 +392,46 @@ public class Fonction{
      */
     public void Joueur(String [][] grille, String vous) throws IOException
     {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-        Fonction fonction = new Fonction() ;
+        Fonction fonction = new Fonction();
 
         /*
          * Choix des coordonnées pour le croisseur 9 cases
          */	
-        System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
+        System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n");
         System.out.println("Placer votre Croiseur\n") ;
-        fonction.firstPrint(grille) ;
-        fonction.navireJoueur(grille, 9) ;
+        fonction.firstPrint(grille);
+        fonction.navireJoueur(grille, 9);
 
         /*
          * Choix des coordonnées pour les Cuirasses 7 cases
          */
         for(int i=0; i<2; i++){
-            System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-            System.out.println("Placer vos Cuirassés\n") ;
-            fonction.firstPrint(grille) ;
-            fonction.navireJoueur(grille, 7) ; 
+            System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n");
+            System.out.println("Placer vos Cuirassés\n");
+            fonction.firstPrint(grille);
+            fonction.navireJoueur(grille, 7); 
         }
-        
 
         /*
          * Choix des coordonnées pour les 3 Destroyers à 1 cases
          */   
         for(int i=0; i<3; i++){
-            System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-            System.out.println("Placer vos Destroyer\n") ;
-            fonction.firstPrint(grille) ;
-            fonction.navireJoueur(grille, 3) ;  
+            System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n");
+            System.out.println("Placer vos Destroyer\n");
+            fonction.firstPrint(grille);
+            fonction.navireJoueur(grille, 3);  
         }
         
         /*
          * Choix des coordonnées pour les 4 SousMarins à 1 cases
          */
         for(int i=0; i<4; i++){
-            System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n") ;
-            System.out.println("Placer vos SousMarins\n") ;
-            fonction.firstPrint(grille) ;
-            fonction.navireJoueur(grille, 1) ;
+            System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n");
+            System.out.println("Placer vos SousMarins\n");
+            fonction.firstPrint(grille);
+            fonction.navireJoueur(grille, 1);
         }
     }
 
@@ -441,7 +440,7 @@ public class Fonction{
      */
     public void Ordi(String [][] grilleOrdi) throws IOException
     {
-       BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+       BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
        Fonction fonction = new Fonction();
 
@@ -468,7 +467,7 @@ public class Fonction{
         *Positionement des SousMarin � 1 case
         */
         for(int i = 0; i < 4; i++){
-            fonction.navireOrdi(grilleOrdi, 1) ;
+            fonction.navireOrdi(grilleOrdi, 1);
         }
     }
      
@@ -484,14 +483,14 @@ public class Fonction{
                 }
                 else if(i > 0 && j > 0 || j == (colonne-1))
                 {
-                    System.out.print(grilleCachee[i][j]+ "  ") ;
+                    System.out.print(grilleCachee[i][j]+ "  ");
                 }
                 else
                 {
-                    System.out.print(grilleCachee[i][j]+ " ") ;
+                    System.out.print(grilleCachee[i][j]+ " ");
                 }
             }
-            System.out.println() ;
+            System.out.println();
         }
     }
     
@@ -500,18 +499,18 @@ public class Fonction{
      */
     public int Quitter(int confirm) throws IOException
     {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
         do
         {
-            System.out.println("\nSouhaitez-vous quitter le jeu ?") ;
-            System.out.println("1: non ") ;
-            System.out.println("2: oui ") ;
-            confirm = Integer.parseInt(in.readLine()) ;
+            System.out.println("\nSouhaitez-vous quitter le jeu ?");
+            System.out.println("1: non ");
+            System.out.println("2: oui ");
+            confirm = Integer.parseInt(in.readLine());
         }
-        while (confirm < 1 || confirm > 2) ;
+        while (confirm < 1 || confirm > 2);
 
-        return confirm ;
+        return confirm;
     }
 
 }
