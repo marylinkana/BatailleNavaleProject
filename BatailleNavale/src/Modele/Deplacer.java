@@ -7,14 +7,12 @@ package Modele;
 
 /**
  *
- * @author kanab
+ * @author nabil
  */
-public class Destroyer extends Navire {
-
-    public Destroyer(String sens, Coordonnee position,boolean etat) {
-        super("Destroyer", sens, 3, 1, position,etat);
+public class Deplacer {
+    public Deplacer(Coordonnee position){
+        
     }
-
     
-             
+    
 }

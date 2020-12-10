@@ -11,8 +11,8 @@ package Modele;
  */
 public class Cuirasse extends Navire {
 
-    public Cuirasse(String sens, Coordonnee position) {
-        super("Cuirasse", sens, 7, 9, position);
+    public Cuirasse(String sens, Coordonnee position,boolean intact) {
+        super("Cuirasse", sens, 7, 9, position,intact);
     }
 
     

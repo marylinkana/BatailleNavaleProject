@@ -31,10 +31,10 @@ public class Grille {
     }
     
     private ArrayList<Navire> genererNavires(){
-        Croiseur croiseur = new Croiseur("longueur", new Coordonnee(1, 2));
-        Cuirasse cuirasse = new Cuirasse("longueur", new Coordonnee(2, 3));
-        Destroyer destroyer = new Destroyer("longueur", new Coordonnee(3, 4));
-        SousMarin sousMarin = new SousMarin("longueur", new Coordonnee(4, 5));
+        Croiseur croiseur = new Croiseur("longueur", new Coordonnee(1, 2), true);
+        Cuirasse cuirasse = new Cuirasse("longueur", new Coordonnee(2, 3), true);
+        Destroyer destroyer = new Destroyer("longueur", new Coordonnee(3, 4), true);
+        SousMarin sousMarin = new SousMarin("longueur", new Coordonnee(4, 5), true);
         this.navires.add(croiseur);
         this.navires.add(cuirasse);
         this.navires.add(destroyer);

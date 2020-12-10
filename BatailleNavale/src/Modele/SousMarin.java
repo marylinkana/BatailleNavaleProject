@@ -11,8 +11,8 @@ package Modele;
  */
 public class SousMarin extends Navire {
 
-    public SousMarin(String sens, Coordonnee position) {
-        super("SousMarin", sens, 1, 1, position);
+    public SousMarin(String sens, Coordonnee position,boolean etat) {
+        super("SousMarin", sens, 1, 1, position,etat);
     }
     
 }

@@ -5,6 +5,10 @@
  */
 package Modele;
 
+import java.util.ArrayList;
+import Vue.Grille;
+import java.util.Scanner;
+
 /**
  *
  * @author kanab
@@ -15,13 +19,18 @@ public class Navire {
     public int taille;
     public int puissance;
     public Coordonnee position;
+    public boolean intact;
+    
+    
 
-    public Navire(String type, String sens, int taille, int puissance, Coordonnee position) {
+    public Navire(String type, String sens, int taille, int puissance, Coordonnee position,boolean intact) {
         this.type = type;
         this.sens = sens;
         this.taille = taille;
         this.puissance = puissance;
         this.position = position;
+        this.intact = intact;
+        
     }
 
     public String getType() {
@@ -76,5 +85,17 @@ public class Navire {
     public Coordonnee seDeplacer(Coordonnee newPosition){
         return newPosition;
     }  
+    public Navire choisirNavire(ArrayList<Navire> navires){
+        
+        Scanner scanner1 = new Scanner(System.in);
+        for (int i = 0;i < navires.size()+1; i++) {
+            
+            System.out.print("Numéro : " + i + " navire : " + navires.get(i));
+            
+        }
+        System.out.println("Choisissez un numéro de navire.");
+        int numero = scanner1.nextInt();
+        return navires.get(numero);
     
+    }
 }
