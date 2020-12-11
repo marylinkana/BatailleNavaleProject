@@ -9,9 +9,12 @@ package Modele;
  *
  * @author kanab
  */
-
+import Modele.Navire;
 import Modele.Coordonnee;
 import java.util.Scanner;
+import java.util.ArrayList;
+import Vue.Grille;
+
 
 
 
@@ -57,5 +60,23 @@ public class Tir {
         return Case;
     }
     
+    public int Tirer(Coordonnee cible,ArrayList<Navire> navires){
+        int touche = 0;
+        choisirNavire navire = new choisirNavire(ArrayList<Navire> navires);
+        Cibler cible = new Cibler(Coordonnee cible);
+        Coordonnee a=cible.abscisse;
+        Coordonnee b=cible.ordonnee;
+        for(int i=0;i<navires.size()+1;i++){
+            if(Cibler(Coordonnee cible) == navires.get(i).getPosition().getAbscisse() && ){
+
+                grille[a][b]= 'X';
+                Cibler cible = new Cibler(Coordonnee cible);
+            }
+            else(){
+                grille[a][b]='~';
+            
+            }
+        }
+    }
        
 }
