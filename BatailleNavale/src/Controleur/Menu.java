@@ -5,6 +5,25 @@ import Vue.Jeux;
 import java.io.* ;
 
 public class Menu{
+    
+    /*
+     * Permet de quitter le jeux
+     */
+    public static int quitter(int confirm) throws IOException
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+
+        do
+        {
+            System.out.println("\nSouhaitez-vous quitter le jeu ?");
+            System.out.println("1: non ");
+            System.out.println("2: oui ");
+            confirm = Integer.parseInt(in.readLine());
+        }
+        while (confirm < 1 || confirm > 2);
+
+        return confirm;
+    }
 
     public static void main(String[] args) throws IOException{
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
@@ -12,8 +31,6 @@ public class Menu{
         int menu = 0 ;
         int confirm = 0 ; 
         boolean erreur = false ;
-
-        Grille fonction = new Grille() ;
 
         do{
             do{
@@ -31,12 +48,12 @@ public class Menu{
 
             switch (menu){
                 case 1 :
-                    Jeux grille = new Jeux();
-                    confirm = fonction.Quitter(confirm) ;	
+                    new Jeux();
+                    confirm = quitter(confirm) ;	
                 break ;
 
                 case 0 :
-                    confirm = fonction.Quitter(confirm) ;	
+                    confirm = quitter(confirm) ;	
                 break ;
             }
 

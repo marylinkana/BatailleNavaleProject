@@ -105,7 +105,7 @@ public class Grille{
     /*
      * ORGANISE LES GRILLES
      */
-    public void firstPrint(String a [][])
+    public void firstGrille(String a [][])
     {
         for (int i = 0 ; i < 16 ; i++){
             for (int j = 0 ; j < 16 ; j++){
@@ -130,7 +130,7 @@ public class Grille{
     /*
      * Positionne les grilles cote à cote
      */
-    public void secondPrint(String a [][], String b [][])
+    public void doubleGrille(String a [][], String b [][])
     {
         for (int i = 0 ; i < 16 ; i++)
         {
@@ -401,7 +401,7 @@ public class Grille{
          */	
         System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n");
         System.out.println("Placer votre Croiseur\n") ;
-        fonction.firstPrint(grille);
+        fonction.firstGrille(grille);
         fonction.navireJoueur(grille, 9);
 
         /*
@@ -410,7 +410,7 @@ public class Grille{
         for(int i=0; i<2; i++){
             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n");
             System.out.println("Placer vos Cuirassés\n");
-            fonction.firstPrint(grille);
+            fonction.firstGrille(grille);
             fonction.navireJoueur(grille, 7); 
         }
 
@@ -420,7 +420,7 @@ public class Grille{
         for(int i=0; i<3; i++){
             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n");
             System.out.println("Placer vos Destroyer\n");
-            fonction.firstPrint(grille);
+            fonction.firstGrille(grille);
             fonction.navireJoueur(grille, 3);  
         }
         
@@ -430,7 +430,7 @@ public class Grille{
         for(int i=0; i<4; i++){
             System.out.println("\n\n\n\n\n" + vous.toUpperCase() + " : COMPLETEZ VOTRE GRILLE DE JEU\n");
             System.out.println("Placer vos SousMarins\n");
-            fonction.firstPrint(grille);
+            fonction.firstGrille(grille);
             fonction.navireJoueur(grille, 1);
         }
     }
@@ -471,7 +471,10 @@ public class Grille{
         }
     }
      
-    public void Grille(int colonne, int ligne, String [][] grilleCachee) throws IOException
+    /*
+     * Gestionnaire de la grille caché (celle de l'ordinateur)
+     */
+    public void grilleCache(int colonne, int ligne, String [][] grilleCachee) throws IOException
     {
         for (int i = 0 ; i < ligne ; i++)
         {
@@ -492,25 +495,6 @@ public class Grille{
             }
             System.out.println();
         }
-    }
-    
-    /*
-     * Permet de quitter le jeux
-     */
-    public int Quitter(int confirm) throws IOException
-    {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-
-        do
-        {
-            System.out.println("\nSouhaitez-vous quitter le jeu ?");
-            System.out.println("1: non ");
-            System.out.println("2: oui ");
-            confirm = Integer.parseInt(in.readLine());
-        }
-        while (confirm < 1 || confirm > 2);
-
-        return confirm;
     }
 
 }

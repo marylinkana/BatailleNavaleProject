@@ -1,15 +1,17 @@
 package Vue;
 import java.io.* ;
 
-public class Jeux
-    {
-
+public class Jeux{
+    
+    /*
+     * Permet de génerer et de jouer une partie
+     */
     public Jeux() throws IOException{
 		
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
         Grille fonction = new Grille();
 
-    String grille[][] = new String[16][16] ;
+        String grille[][] = new String[16][16] ;
         String grilleOrdi[][] = new String[16][16] ;
         String grilleCachee[][] = new String[16][16] ; 
         String nomDuJoueur = "";
@@ -79,7 +81,7 @@ public class Jeux
         {
 
             System.out.println("   " + nomDuJoueur.toUpperCase() + "                                                               " + "BOOT" + "\n") ;
-            fonction.secondPrint(grille, grilleCachee) ;		
+            fonction.doubleGrille(grille, grilleCachee) ;		
 
             if (compteur % 2 == 1){	
                 do
@@ -272,8 +274,8 @@ public class Jeux
         }
         while(touche != 2 && toucheA != 2);
         
-        fonction.secondPrint(grille, grilleCachee);
-        fonction.secondPrint(grille, grilleOrdi);
+        fonction.doubleGrille(grille, grilleCachee);
+        fonction.doubleGrille(grille, grilleOrdi);
         if (toucheA == 2) 
         {
             System.out.println(nomDuJoueur + " : WINNER");
@@ -283,5 +285,6 @@ public class Jeux
             System.out.println(nomDuJoueur + " : GAME OVER");
         }	
     }
+    
 }
 
