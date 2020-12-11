@@ -1,6 +1,6 @@
 package Controleur;
 
-import Vue.Fonction;
+import Vue.Grille;
 import Vue.Jeux;
 import java.io.* ;
 
@@ -13,7 +13,7 @@ public class Menu{
         int confirm = 0 ; 
         boolean erreur = false ;
 
-        Fonction fonction = new Fonction() ;
+        Grille fonction = new Grille() ;
 
         do{
             do{

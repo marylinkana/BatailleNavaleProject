@@ -7,7 +7,7 @@ public class Jeux
     public Jeux() throws IOException{
 		
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
-        Fonction fonction = new Fonction();
+        Grille fonction = new Grille();
 
     String grille[][] = new String[16][16] ;
         String grilleOrdi[][] = new String[16][16] ;
