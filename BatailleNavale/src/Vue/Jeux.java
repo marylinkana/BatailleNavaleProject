@@ -40,7 +40,6 @@ public class Jeux{
                 grilleCachee[i][j] = "~  " ;              
             }
         }
-
         for (int i = 0 ; i < 16 ; i++) {
             if(i<10){
                 grille[i][0] = i + "" ; // nombres en Abscisse
@@ -66,15 +65,15 @@ public class Jeux{
          */
         fonction.Ordi(grilleOrdi) ;
 
-        /*
-         * Placement des bateaux du joueur
-         */
         System.out.println("\nJOUER CONTRE L'ORDINATEUR,") ;
 
         System.out.println("\nEntrez votre nom") ;
         nomDuJoueur = in.readLine() ;	
         System.out.println() ;
-
+        
+        /*
+         * Placement des bateaux du joueur
+         */
         fonction.Joueur(grille, nomDuJoueur) ;			
 
         do
@@ -86,8 +85,37 @@ public class Jeux{
             if (compteur % 2 == 1){	
                 do
                 {
-                    ligneCiblee = fonction.abscisse() ;	
-                    colonneCiblee = fonction.ordonnee() ;
+                    int action;
+
+                    do
+                    {
+                        System.out.println("\nAction : \n 1: Tirer \n 2: Déplacer") ;
+                        action = Integer.parseInt(in.readLine()) ;
+                    }
+                    while (action != 1 && action != 2) ;
+                    
+                    if(action == 1){
+                        ligneCiblee = fonction.abscisse() ;	
+                        colonneCiblee = fonction.ordonnee() ;
+                    }
+                    else{
+                        int direction;
+                        do
+                        {
+                            System.out.println("\nEntrez le nombre de case du navire à déplacer") ;
+                            action = Integer.parseInt(in.readLine()) ;
+                        }
+                        while (action < 1 || action > 9) ;
+                        do
+                        {
+                            System.out.println("\nEntrez la direction: \n 1:haut, 2:bas, 3:gauche, 4:droite") ;
+                            direction = Integer.parseInt(in.readLine()) ;
+                        }
+                        while (direction < 1 || direction > 4) ;
+                        fonction.firstGrille(grille);
+                        fonction.deplacerNavire(grille, direction, action);
+                    }
+                                        
                 }
                 while (grilleCachee[ligneCiblee][colonneCiblee] == "   " || grilleCachee[ligneCiblee][colonneCiblee] == "X  ") ;
 
