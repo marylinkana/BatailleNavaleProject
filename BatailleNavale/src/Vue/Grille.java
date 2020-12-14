@@ -21,7 +21,7 @@ public class Grille{
             {
                 do
                 {
-                    System.out.println("Le voulez-vous en :\n1: longeur\n2: hauteur") ;
+                    System.out.println("Le navire est en :\n1: longeur\n2: hauteur") ;
                     sens = Integer.parseInt(in.readLine()) ;
                 }
                 while (sens < 1 || sens > 2) ;
@@ -34,6 +34,34 @@ public class Grille{
         while(erreur != false) ;
 
         return sens ;
+    }/*
+     * Permet de gérer le positionnement en longueur ou en largeur
+     */
+    public int directionDeDeplacement() throws IOException{
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
+        int direction = 0;
+        boolean erreur ;
+
+        do
+        {
+            erreur = false ;
+            try
+            {
+                do
+                {
+                    System.out.println("Vous souhaitez le déplacer vers :\n 1: Le haut \n 2: Le bas \n 3: La gauche \n 4: La droite") ;
+                    direction = Integer.parseInt(in.readLine()) ;
+                }
+                while (direction < 1 || direction > 4) ;
+            }
+            catch (NumberFormatException e){
+                System.out.println("Veuillez entrer un entier en 1 et 4\n");
+                erreur = true ;
+            }
+        }
+        while(erreur != false) ;
+
+        return direction ;
     }
     
     /*
@@ -280,109 +308,229 @@ public class Grille{
        while(erreur != 1);
     }
     
-    public void deplacerNavire(String [][] grille,int direction, int tailleNavire) throws IOException
+    /*
+     * Deplacer les Navires du joueur
+     */
+    public void deplacerNavire(String [][] grille, int tailleNavire) throws IOException
     {
-        Grille fonction = new Grille();
+       int erreur = 0;
+       Grille fonction = new Grille();
         
-        Navire navire = new Navire();
+        Navire navire = new Navire();   
         
-        int sens = fonction.sensNavire() ;
-                       
-        int erreur = 0 ;
-        int i = 0 ;
+        int abscisse = fonction.abscisse();
+        int ordonnee = fonction.ordonnee();
         
         do
         {
-            erreur = 1 ;
-
-            if(tailleNavire == 9){
-                navire = new Croiseur(sens, new Coordonnee(fonction.abscisse(), fonction.ordonnee()));
+           int i = 0;
+           int sens = fonction.sensNavire();
+           
+           if(tailleNavire == 9){
+            navire = new Croiseur(sens, new Coordonnee(abscisse, ordonnee));
             }        
             if(tailleNavire == 7){
-                navire = new Cuirasse(sens, new Coordonnee(fonction.abscisse(), fonction.ordonnee()));
+                navire = new Cuirasse(sens, new Coordonnee(abscisse, ordonnee));
             }        
             if(tailleNavire == 3){
-                navire = new Destroyer(sens, new Coordonnee(fonction.abscisse(), fonction.ordonnee()));
+                navire = new Destroyer(sens, new Coordonnee(abscisse, ordonnee));
             }        
             if(tailleNavire == 1){
-                navire = new SousMarin(sens, new Coordonnee(fonction.abscisse(), fonction.ordonnee()));
+                navire = new SousMarin(sens, new Coordonnee(abscisse, ordonnee));
             }
-            
-            switch (sens)
-            {
-                case 1 :
-                {
-                    if((navire.getPosition().getOrdonne() + tailleNavire) > 16)
-                    {
+
+           erreur = 1;
+
+           switch (sens)
+           {
+               case 1 :
+               {
+                   if((navire.getPosition().getOrdonne() + tailleNavire) > 16)
+                   {
                         erreur = 0 ;
-                    }
-                    else
-                    {
-                        do
-                        {
-                            i = navire.getPosition().getOrdonne();
+                   }
+                   else
+                   {
+                       do
+                       {
+                           i = navire.getPosition().getOrdonne();
 
-                            for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + tailleNavire) ; j++)
-                            {
-                                if(grille[navire.getPosition().getAbscisse()][j] != "~  ")
-                                {
-                                    erreur = 0 ;
-                                    i = navire.getPosition().getOrdonne() + tailleNavire ;
-                                }
-                            }
+                           for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + tailleNavire) ; j++)
+                           {
+                               if(grille[navire.getPosition().getAbscisse()][j] == "~  ")
+                               {
+                                   erreur = 0;
+                                   i = navire.getPosition().getOrdonne() + tailleNavire;
+                               }
+                           }
 
-                            if (erreur != 0)
-                            {
-                                for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + tailleNavire) ; j++)
-                                {
-                                    grille[navire.getPosition().getAbscisse()][j] = navire.getSymbole();
-                                }
-                                i = navire.getPosition().getOrdonne() + tailleNavire ;
-                            }
-                        }
-                        while(i < navire.getPosition().getOrdonne() + tailleNavire );
-                    }
-                }
-                break ;
+                           if (erreur != 0)
+                           {
+                               for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + tailleNavire) ; j++)
+                               {
+                                   grille[navire.getPosition().getAbscisse()][j] = "~  ";
 
-                case 2 :
-                {
-                    if((navire.getPosition().getAbscisse() + tailleNavire) > 16)
-                    {
-                        erreur = 0 ;
-                    }
-                    else
-                    {
-                        do
-                        {
-                            i = navire.getPosition().getAbscisse() ;
+                               }
+                               i = navire.getPosition().getOrdonne() + tailleNavire ;
+                           }
+                       }
+                       while(i < navire.getPosition().getOrdonne() + tailleNavire );
+                   }
+               }
+               break;
 
-                            for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + tailleNavire) ; j++)
-                            {
-                                if(grille[j][navire.getPosition().getOrdonne()] != "~  ")
-                                {
-                                    erreur = 0 ;
-                                    i = navire.getPosition().getAbscisse() + tailleNavire ;
-                                }
-                            }
+               case 2 :
+               {
+                   if((navire.getPosition().getAbscisse() + tailleNavire) > 16)
+                   {
+                       erreur = 0;
+                   }
+                   else
+                   {
+                       do
+                       {
+                           i = navire.getPosition().getAbscisse();
 
-                            if (erreur != 0)
-                            {
-                                for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + tailleNavire) ; j++)
-                                {
-                                    grille[j][navire.getPosition().getOrdonne()] = navire.getSymbole();
-                                }
-                                i = navire.getPosition().getAbscisse() + tailleNavire ;
-                            }
-                        }
-                        while(i < navire.getPosition().getAbscisse() + tailleNavire);
-                    }
-                }
-                break;
+                           for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + tailleNavire) ; j++)
+                           {
+                               if(grille[j][navire.getPosition().getOrdonne()] == "~  ")
+                               {
+                                   erreur = 0;
+                                   i = navire.getPosition().getAbscisse() + tailleNavire;
+                                   System.out.println("error");
+                               }
+                           }
+
+                           if (erreur != 0)
+                           {
+                               for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + tailleNavire) ; j++)
+                               {
+                                   grille[j][navire.getPosition().getOrdonne()] = "~  ";
+                               }
+                               i = navire.getPosition().getAbscisse() + tailleNavire ;
+                           }
+                       }
+                       while(i < navire.getPosition().getAbscisse() + tailleNavire );
+                   }
+               }
+               break;
             }
+            repositionnerNavire(grille, tailleNavire, sens, abscisse, ordonnee);
         }
         while(erreur != 1);
+        
+
     }
+    
+    public void repositionnerNavire(String [][] grille, int taille, int sens, int abdcisse, int ordonnee) throws IOException
+    {
+        int erreur = 0;
+        Grille fonction = new Grille();
+        
+        Navire navire = new Navire(); 
+        int direction = fonction.directionDeDeplacement();
+        int abs = Deplacer.abscisse(taille, direction, abdcisse, sens);
+        int ord = Deplacer.ordonnee(taille, direction, ordonnee, sens);
+        
+        do
+        {
+           int i = 0;
+           
+           if(taille == 9){
+            navire = new Croiseur(sens, new Coordonnee(abs, ord));
+            }        
+            if(taille == 7){
+                navire = new Cuirasse(sens, new Coordonnee(abs, ord));
+            }        
+            if(taille == 3){
+                navire = new Destroyer(sens, new Coordonnee(abs, ord));
+            }        
+            if(taille == 1){
+                navire = new SousMarin(sens, new Coordonnee(abs, ord));
+            }
+            
+
+           erreur = 1;
+
+           switch (sens)
+           {
+               case 1 :
+               {
+                   if((navire.getPosition().getOrdonne() + taille) > 16)
+                   {
+                        erreur = 0 ;
+                   }
+                   else
+                   {
+                       do
+                       {
+                           i = navire.getPosition().getOrdonne();
+
+                           for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + taille) ; j++)
+                           {
+                               if(grille[navire.getPosition().getAbscisse()][j] != "~  ")
+                               {
+                                   erreur = 0;
+                                   i = navire.getPosition().getOrdonne() + taille;
+                               }
+                           }
+
+                           if (erreur != 0)
+                           {
+                               for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + taille) ; j++)
+                               {
+                                   grille[navire.getPosition().getAbscisse()][j] = navire.getSymbole();
+
+                               }
+                               i = navire.getPosition().getOrdonne() + taille ;
+                           }
+                       }
+                       while(i < navire.getPosition().getOrdonne() + taille );
+                   }
+               }
+               break;
+
+               case 2 :
+               {
+                   if((navire.getPosition().getAbscisse() + taille) > 16)
+                   {
+                       erreur = 0;
+                   }
+                   else
+                   {
+                       do
+                       {
+                           i = navire.getPosition().getAbscisse();
+
+                           for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + taille) ; j++)
+                           {
+                               if(grille[j][navire.getPosition().getOrdonne()] != "~  ")
+                               {
+                                   erreur = 0;
+                                   i = navire.getPosition().getAbscisse() + taille;
+                                   System.out.println("error");
+                               }
+                           }
+
+                           if (erreur != 0)
+                           {
+                               for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + taille) ; j++)
+                               {
+                                   grille[j][navire.getPosition().getOrdonne()] = "~  ";
+                               }
+                               i = navire.getPosition().getAbscisse() + taille ;
+                           }
+                       }
+                       while(i < navire.getPosition().getAbscisse() + taille );
+                   }
+               }
+               break;
+           }
+       }
+       while(erreur != 1);
+    }
+       
+    
      
     /*
      * Place les navires de l'ordinateur dans la grille

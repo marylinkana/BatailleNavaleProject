@@ -1,4 +1,9 @@
 package Vue;
+import Modele.Coordonnee;
+import Modele.Croiseur;
+import Modele.Cuirasse;
+import Modele.Destroyer;
+import Modele.SousMarin;
 import java.io.* ;
 
 public class Jeux{
@@ -86,7 +91,7 @@ public class Jeux{
                 do
                 {
                     int action;
-
+                    int taille;
                     do
                     {
                         System.out.println("\nAction : \n 1: Tirer \n 2: Déplacer") ;
@@ -99,21 +104,13 @@ public class Jeux{
                         colonneCiblee = fonction.ordonnee() ;
                     }
                     else{
-                        int direction;
                         do
                         {
-                            System.out.println("\nEntrez le nombre de case du navire à déplacer") ;
-                            action = Integer.parseInt(in.readLine()) ;
+                            System.out.println("\nEntez la taille du navire à déplacer") ;
+                            taille = Integer.parseInt(in.readLine()) ;
                         }
-                        while (action < 1 || action > 9) ;
-                        do
-                        {
-                            System.out.println("\nEntrez la direction: \n 1:haut, 2:bas, 3:gauche, 4:droite") ;
-                            direction = Integer.parseInt(in.readLine()) ;
-                        }
-                        while (direction < 1 || direction > 4) ;
-                        fonction.firstGrille(grille);
-                        fonction.deplacerNavire(grille, direction, action);
+                        while (taille!=9 && taille!=7 && taille!=3 && taille!=1);
+                        fonction.deplacerNavire(grille, taille);
                     }
                                         
                 }
