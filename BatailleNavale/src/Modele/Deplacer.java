@@ -18,16 +18,18 @@ public class Deplacer {
      */
     public static int abscisse(int taille, int direction, int abscisse, int sens) throws IOException
     {
-        if(sens == 2){
+        if(sens == 1){
             if(direction == 1){
                 if(abscisse-1 >= 1){
                     abscisse--;
                 }
+                else System.out.println("Déplacement impossible");
             }
             if(direction == 2){
                 if(abscisse+1 <= 15){
                     abscisse++;
                 }
+                else System.out.println("Déplacement impossible");
             }
         }
         else{
@@ -35,11 +37,13 @@ public class Deplacer {
                 if(abscisse-1 >= 1){
                     abscisse--;
                 }
+                else System.out.println("Déplacement impossible");
             }
             if(direction == 2){
                 if(abscisse+taille <= 15){
                     abscisse++;
                 }
+                else System.out.println("Déplacement impossible");
             }  
         }
         return abscisse ;
@@ -50,16 +54,18 @@ public class Deplacer {
      */
     public static int ordonnee(int taille, int direction, int ordonnee, int sens) throws IOException 
     {   
-        if(sens == 2){
+        if(sens == 1){
             if(direction == 3){
                 if(ordonnee-1 >= 1){
                     ordonnee--;
                 }
+                else System.out.println("Déplacement impossible");
             }
             if(direction == 4){
                 if(ordonnee+taille <= 15){
                     ordonnee++;
                 }
+                else System.out.println("Déplacement impossible");
             }
         }
         else{
@@ -67,14 +73,16 @@ public class Deplacer {
                 if(ordonnee-1 >= 1){
                     ordonnee--;
                 }
+                else System.out.println("Déplacement impossible");
             }
             if(direction == 4){
                 if(ordonnee+1 <= 15){
                     ordonnee++;
                 }
+                else System.out.println("Déplacement impossible");
             }
         }
-            return ordonnee ;
+        return ordonnee ;
     }
     
 }

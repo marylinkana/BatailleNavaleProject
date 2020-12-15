@@ -102,6 +102,8 @@ public class Jeux{
                     if(action == 1){
                         ligneCiblee = fonction.abscisse() ;	
                         colonneCiblee = fonction.ordonnee() ;
+                        System.out.println("Tire de " + nomDuJoueur + " sur : (" + ligneCiblee + " , " + colonneCiblee + ")");
+
                     }
                     else{
                         do
@@ -112,7 +114,6 @@ public class Jeux{
                         while (taille!=9 && taille!=7 && taille!=3 && taille!=1);
                         fonction.deplacerNavire(grille, taille);
                     }
-                                        
                 }
                 while (grilleCachee[ligneCiblee][colonneCiblee] == "   " || grilleCachee[ligneCiblee][colonneCiblee] == "X  ") ;
 
@@ -138,7 +139,8 @@ public class Jeux{
                     do
                     {
                         ligne = (int)(Math.random() * (15) + 1) ;
-                        colonne = (int)(Math.random() * (15) + 1) ;	
+                        colonne = (int)(Math.random() * (15) + 1) ;
+                        System.out.println("Tire de BOOT sur : (" + ligne + " , " + colonne + ")");
                     }					
                     while(grille[ligne][colonne] == "   " || grille[ligne][colonne] == "X  ") ;
 
