@@ -477,12 +477,13 @@ public class Grille{
 
                            if (erreur != 0)
                            {
-                               for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + taille) ; j++)
-                               {
-                                   grille[navire.getPosition().getAbscisse()][j] = navire.getSymbole();
+                                for (int j = navire.getPosition().getOrdonne() ; j < (navire.getPosition().getOrdonne() + taille) ; j++)
+                                {
+                                    grille[navire.getPosition().getAbscisse()][j] = navire.getSymbole();
+                                }
+                                i = navire.getPosition().getOrdonne() + taille ;
+                                System.out.println("Deplacement de : (" + abscisse + " , " + ordonnee +") vers: (" + abs + " , " + ord + ")");
 
-                               }
-                               i = navire.getPosition().getOrdonne() + taille ;
                            }
                        }
                        while(i < navire.getPosition().getOrdonne() + taille );
