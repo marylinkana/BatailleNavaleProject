@@ -25,8 +25,8 @@ public class Jeux{
         int colonne = 0 ; 
         int coordonnee = 0 ;  
         int compteur = 1 ;
-        int touche = 0 ;
-        int toucheA = 0 ;
+        int toucheO = 0 ;
+        int toucheJ = 0 ;
         int col = 0 ;
         int ln = 0 ;
         int choix = 0 ;
@@ -34,6 +34,8 @@ public class Jeux{
         int continuer = 0 ; 
         int ligneCiblee = 0 ;
         int colonneCiblee = 0 ;
+        int action;
+
 
         /*
          * Création des 2 grilles
@@ -90,7 +92,6 @@ public class Jeux{
             if (compteur % 2 == 1){	
                 do
                 {
-                    int action;
                     int taille;
                     do
                     {
@@ -113,24 +114,28 @@ public class Jeux{
                         }
                         while (taille!=9 && taille!=7 && taille!=3 && taille!=1);
                         fonction.deplacerNavire(grille, taille);
+                        compteur = compteur + 1 ;	
+
                     }
                 }
-                while (grilleCachee[ligneCiblee][colonneCiblee] == "   " || grilleCachee[ligneCiblee][colonneCiblee] == "X  ") ;
+                while (action == 1 && (grilleCachee[ligneCiblee][colonneCiblee] == "   " || grilleCachee[ligneCiblee][colonneCiblee] == "X  ")) ;
 
-                if (grilleOrdi[ligneCiblee][colonneCiblee] == "~  ")
-                {
-                    grilleCachee[ligneCiblee][colonneCiblee] = "   " ;	
+                if(action == 1){
+                    if (grilleOrdi[ligneCiblee][colonneCiblee] == "~  ")
+                    {
+                        grilleCachee[ligneCiblee][colonneCiblee] = "   " ;	
+                    }
+                    else if (grilleOrdi[ligneCiblee][colonneCiblee] == "   ")
+                    {
+                        grilleCachee[ligneCiblee][colonneCiblee] = "   " ;	
+                    }	
+                    else
+                    {
+                        grilleCachee[ligneCiblee][colonneCiblee] = "X  " ;
+                        toucheJ = toucheJ + 1 ;
+                    }
+                    compteur = compteur + 1 ;	
                 }
-                else if (grilleOrdi[ligneCiblee][colonneCiblee] == "   ")
-                {
-                    grilleCachee[ligneCiblee][colonneCiblee] = "   " ;	
-                }	
-                else
-                {
-                    grilleCachee[ligneCiblee][colonneCiblee] = "X  " ;
-                    toucheA = toucheA + 1 ;
-                }
-                compteur = compteur + 1 ;	
             }
             else
             {
@@ -158,7 +163,7 @@ public class Jeux{
                     else
                     {
                         grille[ligne][colonne] = "X  " ;
-                        touche = touche + 1 ;
+                        toucheO = toucheO + 1 ;
                         continuer = 1 ;
                         ln = ligne ;
                         col = colonne ;
@@ -215,7 +220,7 @@ public class Jeux{
                             else
                             {
                                 grille[ln-1][col] = "X  " ;
-                                touche = touche + 1 ;
+                                toucheO = toucheO + 1 ;
                                 ln = ln - 1 ;
                                 col = col ;
                                 continuer = 1;	
@@ -239,7 +244,7 @@ public class Jeux{
                             else
                             {
                                 grille[ln][col-1] = "X  " ;
-                                touche = touche + 1 ;
+                                toucheO = toucheO + 1 ;
                                 ln = ln ;
                                 col = col - 1 ;
                                 continuer = 1;	
@@ -263,7 +268,7 @@ public class Jeux{
                             else 
                             {
                                 grille[ln][col+1] = "X  " ;
-                                touche = touche + 1 ;
+                                toucheO = toucheO + 1 ;
                                 ln = ln ;
                                 col = col+1 ;
                                 continuer = 1;	
@@ -288,7 +293,7 @@ public class Jeux{
                             else
                             {
                                 grille[ln+1][col] = "X  " ;
-                                touche = touche + 1 ;
+                                toucheO = toucheO + 1 ;
                                 ln = ln + 1 ;
                                 col = col ;	
                                 continuer = 1;	
@@ -299,18 +304,18 @@ public class Jeux{
                 compteur = compteur + 1;
             }
         }
-        while(touche != 2 && toucheA != 2);
+        while(toucheO != 2 && toucheJ != 2);
         
-        fonction.doubleGrille(grille, grilleCachee);
-        fonction.doubleGrille(grille, grilleOrdi);
-        if (toucheA == 2) 
+        if (toucheJ == 2) 
         {
             System.out.println(nomDuJoueur + " : WINNER");
         }
         else
         {
             System.out.println(nomDuJoueur + " : GAME OVER");
-        }	
+        }
+        fonction.doubleGrille(grille, grilleCachee);
+        fonction.doubleGrille(grille, grilleOrdi);
     }
     
 }
