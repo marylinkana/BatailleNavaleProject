@@ -517,7 +517,7 @@ public class Grille{
                            {
                                 for (int j = navire.getPosition().getAbscisse() ; j < (navire.getPosition().getAbscisse() + taille) ; j++)
                                 {
-                                    grille[j][navire.getPosition().getOrdonne()] = "~  ";
+                                    grille[j][navire.getPosition().getOrdonne()] = navire.getSymbole();
                                 }
                                 i = navire.getPosition().getAbscisse() + taille ;
                                 System.out.println("Deplacement de : (" + abscisse + " , " + ordonnee +") vers: (" + abs + " , " + ord + ")");
