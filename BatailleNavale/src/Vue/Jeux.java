@@ -6,11 +6,21 @@ import Modele.Destroyer;
 import Modele.SousMarin;
 import java.io.* ;
 
+/**
+ *
+ * @author kanab
+ */
 public class Jeux{
     
     /*
      * Permet de génerer et de jouer une partie
      */
+
+    /**
+     *
+     * @throws IOException
+     */
+
     public Jeux() throws IOException{
 		
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in)) ;
