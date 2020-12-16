@@ -306,6 +306,7 @@ public class Jeux{
         }
         while(toucheO != 2 && toucheJ != 2);
         
+        fonction.doubleGrille(grille, grilleCachee);
         if (toucheJ == 2) 
         {
             System.out.println(nomDuJoueur + " : WINNER");
@@ -314,7 +315,6 @@ public class Jeux{
         {
             System.out.println(nomDuJoueur + " : GAME OVER");
         }
-        fonction.doubleGrille(grille, grilleCachee);
         fonction.doubleGrille(grille, grilleOrdi);
     }
     
